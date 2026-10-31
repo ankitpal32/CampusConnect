@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Campus Events Directory';
+$pageTitle = 'Explore Events';
 
 require_once __DIR__ . '/config/database.php';
 
@@ -102,29 +102,31 @@ require_once __DIR__ . '/includes/header.php';
 
     <!-- Page Header -->
     <div class="mb-4">
-        <span class="cc-eyebrow">Event Directory</span>
-        <h1 class="h2 fw-bold mt-1 mb-2">Campus Events Directory</h1>
-        <p class="text-secondary small mb-0" style="max-width: 620px;">
-            Explore upcoming workshops, seminars, competitions, and student activities. Search by keyword or filter by topic.
+        <span class="cc-eyebrow">CAMPUS EVENT DIRECTORY &bull; SKFGI MANKUNDU</span>
+        <h1 class="display-5 fw-bold mt-1 mb-2">Explore Campus Events</h1>
+        <p class="text-secondary" style="max-width: 680px; font-size: 1.05rem;">
+            Discover technical workshops, student exhibitions, resume seminars, and inter-departmental competitions at SKFGI. Filter by category or search by topic and venue.
         </p>
     </div>
 
     <!-- Filter Card -->
-    <section class="cc-card p-3 p-md-4 mb-4" aria-label="Search and filter events">
+    <section class="cc-card p-4 mb-4" aria-label="Search and filter events">
         <form method="get" action="/campusconnect/events.php" class="row g-3 align-items-end">
 
             <div class="col-lg-5 col-md-6">
-                <label for="search" class="form-label">Search keywords</label>
+                <label for="search" class="form-label">
+                    Search keywords or venue
+                </label>
                 <div class="input-group">
                     <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: var(--cc-radius-md) 0 0 var(--cc-radius-md); border-color: var(--cc-border-strong);">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                     </span>
                     <input
                         type="search"
                         class="form-control border-start-0"
                         id="search"
                         name="search"
-                        placeholder="Search title, venue, or keywords..."
+                        placeholder="e.g. BCA, Coding, Workshop, Lab 3, Auditorium..."
                         value="<?= eventEscape($search) ?>"
                         maxlength="100"
                         style="border-radius: 0 var(--cc-radius-md) var(--cc-radius-md) 0;"
@@ -133,7 +135,9 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <label for="category" class="form-label">Category</label>
+                <label for="category" class="form-label">
+                    Category
+                </label>
                 <select class="form-select" id="category" name="category">
                     <option value="">All Categories</option>
                     <?php foreach ($allCategories as $cat): ?>
@@ -145,7 +149,9 @@ require_once __DIR__ . '/includes/header.php';
             </div>
 
             <div class="col-lg-2 col-md-6">
-                <label for="sort" class="form-label">Sort by</label>
+                <label for="sort" class="form-label">
+                    Sort by
+                </label>
                 <select class="form-select" id="sort" name="sort">
                     <option value="date_asc" <?= $sort === 'date_asc' ? 'selected' : '' ?>>Date (Soonest)</option>
                     <option value="date_desc" <?= $sort === 'date_desc' ? 'selected' : '' ?>>Date (Latest)</option>
@@ -156,7 +162,7 @@ require_once __DIR__ . '/includes/header.php';
 
             <div class="col-lg-2 col-md-6 d-flex gap-2">
                 <button type="submit" class="btn cc-btn-primary flex-grow-1">
-                    Filter
+                    Apply Filter
                 </button>
 
                 <?php if ($hasActiveFilters): ?>
@@ -171,7 +177,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Active Filter Chips -->
         <?php if ($hasActiveFilters): ?>
             <div class="d-flex flex-wrap align-items-center gap-2 mt-3 pt-3 border-top" style="border-color: var(--cc-border) !important;">
-                <span class="small text-muted fw-semibold">Active:</span>
+                <span class="small text-muted fw-semibold">Active filters:</span>
 
                 <?php if ($search !== ''): ?>
                     <span class="cc-badge cc-badge-neutral">
@@ -191,7 +197,7 @@ require_once __DIR__ . '/includes/header.php';
                     </span>
                 <?php endif; ?>
 
-                <a href="/campusconnect/events.php" class="small text-primary fw-semibold ms-2">
+                <a href="/campusconnect/events.php" class="small text-primary fw-bold ms-2">
                     Clear all filters
                 </a>
             </div>
@@ -201,11 +207,11 @@ require_once __DIR__ . '/includes/header.php';
     <!-- Results Section -->
     <section aria-labelledby="results-heading">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 id="results-heading" class="h5 fw-bold mb-0">
-                <?= count($events) ?> <?= count($events) === 1 ? 'Event' : 'Events' ?> Found
+            <h2 id="results-heading" class="h4 fw-bold mb-0">
+                <?= count($events) ?> <?= count($events) === 1 ? 'Event' : 'Events' ?> Available
             </h2>
             <span class="text-secondary small">
-                Live from database
+                Updated live from MySQL database
             </span>
         </div>
 
@@ -214,12 +220,12 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="cc-empty-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </div>
-                <h3 class="h5 fw-bold">No events found matching your search</h3>
-                <p class="text-secondary small mx-auto" style="max-width: 420px;">
-                    Try adjusting your keyword query or choosing a different category.
+                <h3 class="h4 fw-bold">No matching campus events found</h3>
+                <p class="text-secondary mx-auto" style="max-width: 420px;">
+                    We couldn't find any published upcoming events matching your selected criteria. Try modifying your search term or category.
                 </p>
-                <div class="d-flex justify-content-center gap-2 mt-2">
-                    <a href="/campusconnect/events.php" class="btn cc-btn-primary btn-sm">
+                <div class="d-flex justify-content-center gap-2 mt-3">
+                    <a href="/campusconnect/events.php" class="btn cc-btn-primary">
                         Show All Events
                     </a>
                 </div>
@@ -242,44 +248,51 @@ require_once __DIR__ . '/includes/header.php';
                         $badgeText = 'Deadline Passed';
                     } elseif ($remaining === 0) {
                         $badgeClass = 'cc-badge-danger';
-                        $badgeText = 'Full Capacity';
+                        $badgeText = 'Full capacity';
                     } elseif ($remaining <= 5) {
                         $badgeClass = 'cc-badge-warning';
-                        $badgeText = $remaining . ' seats left';
+                        $badgeText = 'Only ' . $remaining . ' Seats Left';
                     } else {
                         $badgeClass = 'cc-badge-success';
-                        $badgeText = $remaining . ' seats open';
+                        $badgeText = $remaining . ' Seats Available';
                     }
                     ?>
                     <div class="col-md-6 col-lg-4">
                         <article class="cc-card cc-card-interactive h-100 d-flex flex-column p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="cc-badge cc-badge-category">
-                                    <?= eventEscape($event['category']) ?>
-                                </span>
-                                <span class="cc-badge <?= $badgeClass ?>">
-                                    <?= $badgeText ?>
-                                </span>
+
+                            <!-- Eventbrite-style Header: Date Badge Block + Category & Status -->
+                            <div class="d-flex align-items-start gap-3 mb-3">
+                                <div class="cc-date-badge" aria-label="Event date">
+                                    <span class="cc-date-badge-month"><?= $eventTimestamp !== false ? date('M', $eventTimestamp) : 'TBC' ?></span>
+                                    <span class="cc-date-badge-day"><?= $eventTimestamp !== false ? date('d', $eventTimestamp) : '--' ?></span>
+                                </div>
+
+                                <div class="flex-grow-1">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-1 mb-1">
+                                        <span class="cc-badge cc-badge-category">
+                                            <?= eventEscape($event['category']) ?>
+                                        </span>
+                                        <span class="cc-badge <?= $badgeClass ?>">
+                                            <?= $badgeText ?>
+                                        </span>
+                                    </div>
+                                    <div class="small text-muted">
+                                        <?= $eventTimestamp !== false ? date('l &bull; g:i A', $eventTimestamp) : 'Schedule pending' ?>
+                                    </div>
+                                </div>
                             </div>
 
-                            <h3 class="h5 fw-bold mb-2">
-                                <a href="/campusconnect/event-details.php?id=<?= (int) $event['id'] ?>" class="text-reset text-decoration-none">
+                            <h3 class="h5 fw-bold mb-2" style="line-height: 1.35;">
+                                <a href="/campusconnect/event-details.php?id=<?= (int) $event['id'] ?>" class="text-reset">
                                     <?= eventEscape($event['title']) ?>
                                 </a>
                             </h3>
 
                             <p class="text-secondary small mb-4 flex-grow-1" style="line-height: 1.6;">
-                                <?= eventEscape(mb_strimwidth($event['description'], 0, 120, '...')) ?>
+                                <?= eventEscape(mb_strimwidth($event['description'], 0, 130, '...')) ?>
                             </p>
 
                             <div class="pt-3 border-top mt-auto" style="border-color: var(--cc-border) !important;">
-                                <div class="d-flex align-items-center gap-2 text-secondary small mb-2">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                    <span>
-                                        <?= $eventTimestamp !== false ? date('D, M j, Y, g:i A', $eventTimestamp) : 'Date to be confirmed' ?>
-                                    </span>
-                                </div>
-
                                 <div class="d-flex align-items-center gap-2 text-secondary small mb-3">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                     <span class="text-truncate"><?= eventEscape($event['venue']) ?></span>
@@ -295,8 +308,8 @@ require_once __DIR__ . '/includes/header.php';
                                     </div>
                                 </div>
 
-                                <a href="/campusconnect/event-details.php?id=<?= (int) $event['id'] ?>" class="btn cc-btn-outline w-100 btn-sm">
-                                    View Details
+                                <a href="/campusconnect/event-details.php?id=<?= (int) $event['id'] ?>" class="btn cc-btn-outline w-100">
+                                    View Details &bull; Register &rarr;
                                 </a>
                             </div>
                         </article>

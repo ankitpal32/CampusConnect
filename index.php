@@ -1,5 +1,5 @@
 <?php
-$pageTitle = 'Discover Campus Events';
+$pageTitle = 'Discover Campus Events — SKFGI Mankundu';
 
 require_once __DIR__ . '/config/database.php';
 
@@ -50,19 +50,19 @@ function homeEscape($value): string
 
 <main>
 
-    <!-- Hero Section with Public Event Discovery -->
+    <!-- Hero Section with SKFGI Institutional Context -->
     <section class="py-5" style="background: linear-gradient(180deg, #f6f1ff 0%, #faf9fd 100%); border-bottom: 1px solid var(--cc-border);">
         <div class="container py-lg-4">
             <div class="row align-items-center g-5">
                 <div class="col-lg-7">
-                    <span class="cc-eyebrow">OFFICIAL CAMPUS DIRECTORY</span>
+                    <span class="cc-eyebrow">SKFGI MANKUNDU &bull; STUDENT FULL-STACK MVP</span>
 
                     <h1 class="display-4 fw-bold mt-2 mb-3" style="font-family: 'Outfit', sans-serif; letter-spacing: -0.03em; color: var(--cc-text-main);">
-                        Discover, participate, and lead <span style="color: var(--cc-primary);">at your university.</span>
+                        Campus life, technical workshops, and activities <span style="color: var(--cc-primary);">at SKFGI.</span>
                     </h1>
 
-                    <p class="lead text-secondary mb-4" style="max-width: 600px; font-size: 1.15rem; line-height: 1.7;">
-                        Explore verified departmental workshops, student hackathons, guest lectures, and campus festivals. Check real-time seat availability and register before deadlines close.
+                    <p class="lead text-secondary mb-4" style="max-width: 620px; font-size: 1.15rem; line-height: 1.7;">
+                        A student-developed event management platform for Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu, Hooghly. Explore computing hackathons, engineering exhibitions, and campus activities with live MySQL seat reservations.
                     </p>
 
                     <!-- Fast Search Bar -->
@@ -75,7 +75,7 @@ function homeEscape($value): string
                                 type="search"
                                 name="search"
                                 class="form-control border-0 shadow-none ps-1"
-                                placeholder="Search by topic, workshop title, or venue..."
+                                placeholder="Search SKFGI workshops, hackathons, or venues..."
                                 aria-label="Search campus events"
                                 maxlength="100"
                             >
@@ -87,11 +87,11 @@ function homeEscape($value): string
 
                     <!-- Quick Category Shortcuts -->
                     <div class="d-flex flex-wrap align-items-center gap-2">
-                        <span class="small text-muted fw-semibold me-1">Popular categories:</span>
+                        <span class="small text-muted fw-semibold me-1">Browse by topic:</span>
                         <a href="/campusconnect/events.php?category=Technology" class="cc-badge cc-badge-neutral text-decoration-none">Technology</a>
                         <a href="/campusconnect/events.php?category=Workshop" class="cc-badge cc-badge-neutral text-decoration-none">Workshops</a>
+                        <a href="/campusconnect/events.php?category=Education" class="cc-badge cc-badge-neutral text-decoration-none">BCA & Projects</a>
                         <a href="/campusconnect/events.php?category=Cultural" class="cc-badge cc-badge-neutral text-decoration-none">Cultural</a>
-                        <a href="/campusconnect/events.php?category=Sports" class="cc-badge cc-badge-neutral text-decoration-none">Sports</a>
                         <a href="/campusconnect/events.php" class="small text-primary fw-bold ms-2">All events &rarr;</a>
                     </div>
                 </div>
@@ -99,16 +99,20 @@ function homeEscape($value): string
                 <div class="col-lg-5">
                     <div class="cc-card p-4 p-md-5" style="border: 1px solid var(--cc-primary-border); background: #ffffff; box-shadow: var(--cc-shadow-lg);">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <span class="cc-badge cc-badge-category">Live Campus Schedule</span>
-                            <span class="small text-muted fw-semibold"><?= date('F Y') ?></span>
+                            <span class="cc-badge cc-badge-category">Academic Project Demo</span>
+                            <span class="small text-muted fw-semibold">MAKAUT Affiliated</span>
                         </div>
 
-                        <h2 class="h4 fw-bold mb-3" style="color: var(--cc-text-main);">
-                            Guaranteed seats with live capacity tracking
+                        <h2 class="h4 fw-bold mb-2" style="color: var(--cc-text-main);">
+                            Supreme Knowledge Foundation Group of Institutions
                         </h2>
 
+                        <div class="text-muted small mb-3">
+                            1 Khan Road, Mankundu, Chandannagar, Hooghly, West Bengal
+                        </div>
+
                         <p class="text-secondary small mb-4" style="line-height: 1.7;">
-                            CampusConnect synchronizes directly with university event coordinators. Every event enforces strict venue capacity limits so you never show up to an overbooked hall.
+                            CampusConnect is developed as a student project to demonstrate practical Core PHP, MySQL, PDO transactions, seat reservation locking, and door attendance tracking for college activities.
                         </p>
 
                         <div class="p-3 rounded-3 mb-4" style="background: var(--cc-primary-subtle); border: 1px solid var(--cc-primary-border);">
@@ -123,11 +127,11 @@ function homeEscape($value): string
 
                         <div class="d-grid gap-2">
                             <a href="/campusconnect/events.php" class="btn cc-btn-primary">
-                                Browse Full Event Directory &rarr;
+                                Explore SKFGI Events &rarr;
                             </a>
                             <?php if (!$isLoggedIn): ?>
-                                <a href="/campusconnect/register.php" class="btn cc-btn-outline">
-                                    Create Student Account
+                                <a href="/campusconnect/login.php" class="btn cc-btn-outline">
+                                    Sign In / Try Demo Accounts
                                 </a>
                             <?php else: ?>
                                 <a href="/campusconnect/dashboard.php" class="btn cc-btn-outline">
@@ -145,9 +149,9 @@ function homeEscape($value): string
     <section class="container py-5 my-2">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
             <div>
-                <span class="cc-eyebrow">WHAT'S HAPPENING</span>
+                <span class="cc-eyebrow">SCHEDULED SESSIONS</span>
                 <h2 class="h2 fw-bold mb-1">Upcoming Campus Events</h2>
-                <p class="text-secondary mb-0">Discover activities happening across departments and student societies.</p>
+                <p class="text-secondary mb-0">Browse workshops, student exhibitions, and seminars scheduled across SKFGI departments.</p>
             </div>
 
             <a href="/campusconnect/events.php" class="btn cc-btn-outline">
@@ -267,8 +271,8 @@ function homeEscape($value): string
         <div class="container py-3">
             <div class="text-center max-w-600 mx-auto mb-5">
                 <span class="cc-eyebrow">CURATED PATHWAYS</span>
-                <h2 class="h2 fw-bold">Explore By Interest</h2>
-                <p class="text-secondary mb-0">Browse college activities categorized to help you build skills and enjoy university life.</p>
+                <h2 class="h2 fw-bold">Explore By Academic Interest</h2>
+                <p class="text-secondary mb-0">Browse college activities designed to build technical skills, career readiness, and creative participation.</p>
             </div>
 
             <div class="row g-4">
@@ -276,32 +280,32 @@ function homeEscape($value): string
                 $categoriesList = [
                     [
                         'name' => 'Technology',
-                        'desc' => 'Hackathons, coding challenges, robotics showcases, and software seminars.',
+                        'desc' => 'Coding challenges, problem-solving workshops, hardware prototypes, and robotics demos.',
                         'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
                     ],
                     [
                         'name' => 'Workshop',
-                        'desc' => 'Hands-on practical sessions led by faculty, industry guests, and alumni.',
+                        'desc' => 'Hands-on practical development sessions, resume clinics, and startup idea discussions.',
                         'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>'
                     ],
                     [
+                        'name' => 'Education',
+                        'desc' => 'BCA and engineering project showcases, capstone exhibitions, and technical seminars.',
+                        'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>'
+                    ],
+                    [
                         'name' => 'Cultural',
-                        'desc' => 'Drama, musical showcases, arts exhibitions, and annual college celebrations.',
+                        'desc' => 'Musical performances, drama, acoustic recitals, and campus creative activities.',
                         'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>'
                     ],
                     [
                         'name' => 'Sports',
-                        'desc' => 'Inter-departmental leagues, athletics meets, chess, and friendly tournaments.',
+                        'desc' => 'Inter-departmental leagues, indoor games, athletics meets, and friendly tournaments.',
                         'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>'
                     ],
                     [
-                        'name' => 'Education',
-                        'desc' => 'Career development talks, research symposiums, and exam preparation sessions.',
-                        'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>'
-                    ],
-                    [
                         'name' => 'Other',
-                        'desc' => 'Society orientations, volunteer drives, campus tours, and informal gatherings.',
+                        'desc' => 'Inter-departmental quiz contests, club orientations, and informal campus gatherings.',
                         'icon' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>'
                     ],
                 ];
@@ -338,7 +342,7 @@ function homeEscape($value): string
         <div class="text-center max-w-600 mx-auto mb-5">
             <span class="cc-eyebrow">SIMPLE WORKFLOW</span>
             <h2 class="h2 fw-bold">How CampusConnect Works</h2>
-            <p class="text-secondary mb-0">Three steps from finding an event to participating on campus.</p>
+            <p class="text-secondary mb-0">From discovering open sessions to door check-in at SKFGI.</p>
         </div>
 
         <div class="row g-4">
@@ -357,7 +361,7 @@ function homeEscape($value): string
                     <span class="cc-badge cc-badge-category mb-3" style="font-size: 0.85rem; width: 32px; height: 32px; justify-content: center; padding: 0;">2</span>
                     <h3 class="h5 fw-bold mb-2">Reserve Your Seat</h3>
                     <p class="text-secondary small mb-0" style="line-height: 1.7;">
-                        Sign in with your student account to confirm your registration. Database locks guarantee capacity limits are respected without overbooking.
+                        Sign in with your student credentials to confirm your registration. Database locks guarantee capacity limits are respected without overbooking.
                     </p>
                 </div>
             </div>
@@ -379,10 +383,10 @@ function homeEscape($value): string
         <div class="container py-3">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6">
-                    <span class="cc-eyebrow">BUILT FOR STUDENTS</span>
+                    <span class="cc-eyebrow">BUILT FOR SKFGI STUDENTS</span>
                     <h2 class="h2 fw-bold mb-3">Take the guesswork out of campus participation.</h2>
                     <p class="text-secondary mb-4" style="line-height: 1.7;">
-                        University life moves fast. Notices pinned on departmental bulletin boards or buried in group chats get missed. CampusConnect centralizes official activities in a reliable, searchable hub.
+                        University life moves fast. Notices pinned on departmental bulletin boards or buried in group chats get missed. CampusConnect centralizes activities in a reliable, searchable hub.
                     </p>
 
                     <div class="d-grid gap-3">
@@ -509,12 +513,12 @@ function homeEscape($value): string
                     <div class="accordion-item cc-card" style="overflow: hidden;">
                         <h3 class="accordion-header" id="faq4Heading">
                             <button class="accordion-button collapsed fw-bold py-3 px-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq4Collapse" aria-expanded="false" aria-controls="faq4Collapse" style="background: transparent; color: var(--cc-text-main); box-shadow: none;">
-                                How do college administrators create and manage events?
+                                Is CampusConnect an official SKFGI announcement portal?
                             </button>
                         </h3>
                         <div id="faq4Collapse" class="accordion-collapse collapse" aria-labelledby="faq4Heading" data-bs-parent="#faqAccordion">
                             <div class="accordion-body px-4 pb-4 pt-1 text-secondary" style="line-height: 1.7;">
-                                Designated administrators can access the <strong>Admin Center</strong> to draft and publish events, specify capacities and deadlines, review attendee lists, and monitor event performance metrics.
+                                CampusConnect is developed as an academic web development demonstration project by Ankit Pal. It showcases full-stack web engineering, database design, and real-time registration handling for Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu, Hooghly.
                             </div>
                         </div>
                     </div>

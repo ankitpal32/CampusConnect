@@ -146,31 +146,31 @@ require_once __DIR__ . '/../includes/header.php';
         <ul class="cc-admin-nav-list">
             <li>
                 <a href="/campusconnect/admin/index.php" class="cc-admin-nav-link">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                     Dashboard
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/events.php" class="cc-admin-nav-link">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                     Manage Events
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/event-form.php" class="cc-admin-nav-link active">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     Create Event
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/attendees.php" class="cc-admin-nav-link">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     Attendees
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/reports.php" class="cc-admin-nav-link">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                     Reports
                 </a>
             </li>
@@ -181,16 +181,16 @@ require_once __DIR__ . '/../includes/header.php';
 <main class="container pb-5">
 
     <div class="mb-4">
-        <span class="cc-eyebrow">Event Creation</span>
-        <h1 class="h3 fw-bold mt-1 mb-1">Create New Campus Event</h1>
-        <p class="text-secondary small mb-0">
+        <span class="cc-eyebrow">EVENT CREATION</span>
+        <h1 class="display-6 fw-bold mt-1 mb-1" style="font-family: 'Outfit', sans-serif;">Create New Campus Event</h1>
+        <p class="text-secondary mb-0">
             Publish a workshop, seminar, or competition with verified capacity limits and registration deadlines.
         </p>
     </div>
 
     <?php if ($errors): ?>
         <div class="alert alert-danger mb-4" role="alert">
-            <div class="fw-semibold mb-1">Please correct the following errors:</div>
+            <div class="fw-bold mb-1">Please review the following errors:</div>
             <ul class="mb-0 ps-3 small">
                 <?php foreach ($errors as $error): ?>
                     <li><?= formEscape($error) ?></li>
@@ -201,7 +201,7 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="row g-4">
         <div class="col-lg-8">
-            <div class="cc-card p-4">
+            <div class="cc-card p-4 p-md-5">
                 <form method="post" action="/campusconnect/admin/event-form.php" novalidate>
                     <input type="hidden" name="csrf_token" value="<?= formEscape($_SESSION['csrf_token']) ?>">
 
@@ -214,7 +214,7 @@ require_once __DIR__ . '/../includes/header.php';
                             id="title"
                             name="title"
                             class="form-control"
-                            placeholder="e.g. Annual Autonomous Robotics Workshop"
+                            placeholder="e.g. Annual Autonomous Robotics Hackathon"
                             value="<?= formEscape($title) ?>"
                             maxlength="200"
                             required
@@ -237,14 +237,14 @@ require_once __DIR__ . '/../includes/header.php';
 
                         <div class="col-md-6">
                             <label for="venue" class="form-label">
-                                Venue Location <span class="text-danger">*</span>
+                                Venue / Room <span class="text-danger">*</span>
                             </label>
                             <input
                                 type="text"
                                 id="venue"
                                 name="venue"
                                 class="form-control"
-                                placeholder="e.g. Science Complex Auditorium"
+                                placeholder="e.g. Sir Visvesvaraya Hall, Computer Lab 3, SKFGI Auditorium"
                                 value="<?= formEscape($venue) ?>"
                                 maxlength="200"
                                 required
@@ -254,7 +254,7 @@ require_once __DIR__ . '/../includes/header.php';
 
                     <div class="mb-3">
                         <label for="description" class="form-label">
-                            Description <span class="text-danger">*</span>
+                            Detailed Description <span class="text-danger">*</span>
                         </label>
                         <textarea
                             id="description"
@@ -294,7 +294,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 value="<?= formEscape($deadline) ?>"
                                 required
                             >
-                            <div class="form-text small text-muted">Must be before the event starts.</div>
+                            <div class="form-text small text-muted">Must be set before the event starts.</div>
                         </div>
                     </div>
 
@@ -330,7 +330,7 @@ require_once __DIR__ . '/../includes/header.php';
 
                     <div class="d-flex gap-2 pt-3 border-top" style="border-color: var(--cc-border) !important;">
                         <button type="submit" class="btn cc-btn-primary">
-                            Save & Publish
+                            Save & Publish Event
                         </button>
                         <a href="/campusconnect/admin/events.php" class="btn cc-btn-outline">
                             Cancel
@@ -342,17 +342,17 @@ require_once __DIR__ . '/../includes/header.php';
 
         <div class="col-lg-4">
             <aside class="cc-card p-4">
-                <h2 class="h6 fw-bold mb-3">Publishing Guidelines</h2>
-                <ul class="text-secondary small d-grid gap-2 mb-4 ps-3" style="line-height: 1.6;">
+                <h2 class="h5 fw-bold mb-3">Publishing Checklist</h2>
+                <ul class="text-secondary small d-grid gap-2 mb-4 ps-3" style="line-height: 1.7;">
                     <li>Ensure venue permits match the entered capacity limit.</li>
-                    <li>Set deadlines at least 2 hours prior to the event for roll printing.</li>
-                    <li>Detail software or equipment students need to bring along.</li>
+                    <li>Set deadlines at least 2 hours before the session for attendee roll generation.</li>
+                    <li>Clearly detail software requirements or equipment students need to bring.</li>
                 </ul>
 
-                <div class="p-3 rounded-2" style="background: var(--cc-surface-muted); border: 1px solid var(--cc-border);">
-                    <div class="fw-semibold small text-dark mb-1">Capacity Note</div>
-                    <div class="small text-muted" style="line-height: 1.5;">
-                        Once published, registrations cannot exceed this limit. If updated later, capacity cannot be lower than existing confirmed registrations.
+                <div class="p-3 rounded-3" style="background: var(--cc-primary-subtle); border: 1px solid var(--cc-primary-border);">
+                    <div class="fw-bold small text-primary mb-1">Database Integrity Note</div>
+                    <div class="small text-muted" style="line-height: 1.6;">
+                        Once published, registrations cannot exceed this capacity. If reduced later, capacity cannot be lower than existing confirmed registrations.
                     </div>
                 </div>
             </aside>

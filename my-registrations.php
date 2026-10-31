@@ -57,7 +57,7 @@ require_once __DIR__ . '/includes/header.php';
     <!-- Flash message from session -->
     <?php if (!empty($_SESSION['registration_message'])): ?>
         <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="status">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
             <div><?= myRegistrationEscape($_SESSION['registration_message']) ?></div>
         </div>
         <?php unset($_SESSION['registration_message']); ?>
@@ -65,24 +65,24 @@ require_once __DIR__ . '/includes/header.php';
 
     <?php if (isset($_GET['registered'])): ?>
         <div class="alert alert-success d-flex align-items-center gap-2 mb-4" role="status">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <div><strong>Registration confirmed.</strong> Your seat has been reserved in the college database.</div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <div><strong>Registration confirmed!</strong> Your seat has been reserved successfully in the database.</div>
         </div>
     <?php endif; ?>
 
     <!-- Page Header -->
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
         <div>
-            <span class="cc-eyebrow">Student Portal</span>
-            <h1 class="h3 fw-bold mt-1 mb-1">My Event Registrations</h1>
-            <p class="text-secondary small mb-0">
-                Track your active registrations and view your participation history.
+            <span class="cc-eyebrow">STUDENT PORTAL</span>
+            <h1 class="display-6 fw-bold mt-1 mb-1" style="font-family: 'Outfit', sans-serif;">My Event Registrations</h1>
+            <p class="text-secondary mb-0">
+                Track your active campus registrations and review past participation history.
             </p>
         </div>
 
-        <a href="/campusconnect/events.php" class="btn cc-btn-primary btn-sm">
-            <span>Find Events</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <a href="/campusconnect/events.php" class="btn cc-btn-primary">
+            <span>Explore More Events</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
     </div>
 
@@ -91,13 +91,13 @@ require_once __DIR__ . '/includes/header.php';
             <div class="cc-empty-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
             </div>
-            <h2 class="h5 fw-bold">No Registrations Found</h2>
-            <p class="text-secondary small mx-auto" style="max-width: 440px;">
-                You have not registered for any campus events yet. Explore upcoming seminars and workshops.
+            <h2 class="h4 fw-bold">No Registrations Found</h2>
+            <p class="text-secondary mx-auto" style="max-width: 440px;">
+                You haven't reserved a seat for any campus events yet. Explore upcoming seminars, hackathons, and workshops now.
             </p>
-            <div class="mt-2">
-                <a href="/campusconnect/events.php" class="btn cc-btn-primary btn-sm">
-                    Browse Events
+            <div class="mt-3">
+                <a href="/campusconnect/events.php" class="btn cc-btn-primary">
+                    Browse Upcoming Events
                 </a>
             </div>
         </section>
@@ -105,17 +105,17 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Section 1: Upcoming Active Registrations -->
         <section class="mb-5" aria-labelledby="upcoming-active-heading">
-            <div class="d-flex align-items-center justify-content-between mb-3">
-                <h2 id="upcoming-active-heading" class="h5 fw-bold mb-0">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h2 id="upcoming-active-heading" class="h4 fw-bold mb-0">
                     Active & Upcoming (<?= count($upcomingRegistrations) ?>)
                 </h2>
-                <span class="small text-muted">Confirmed seat reservations</span>
+                <span class="small text-muted">Confirmed seats for scheduled events</span>
             </div>
 
             <?php if (empty($upcomingRegistrations)): ?>
                 <div class="cc-card p-4 text-center text-secondary small">
                     You have no active upcoming registrations right now.
-                    <a href="/campusconnect/events.php" class="fw-semibold ms-1">Find an event to attend &rarr;</a>
+                    <a href="/campusconnect/events.php" class="fw-bold ms-1">Find an event to attend &rarr;</a>
                 </div>
             <?php else: ?>
                 <div class="row g-4">
@@ -126,45 +126,54 @@ require_once __DIR__ . '/includes/header.php';
                         ?>
                         <div class="col-md-6 col-lg-4">
                             <article class="cc-card cc-card-interactive h-100 d-flex flex-column p-4">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="cc-badge cc-badge-category">
-                                        <?= myRegistrationEscape($registration['category']) ?>
-                                    </span>
-                                    <span class="cc-badge cc-badge-success">
-                                        Confirmed Seat
-                                    </span>
+
+                                <!-- Eventbrite-style Date Badge + Status Header -->
+                                <div class="d-flex align-items-start gap-3 mb-3">
+                                    <div class="cc-date-badge" aria-label="Event date">
+                                        <span class="cc-date-badge-month"><?= $eventTimestamp !== false ? date('M', $eventTimestamp) : 'TBC' ?></span>
+                                        <span class="cc-date-badge-day"><?= $eventTimestamp !== false ? date('d', $eventTimestamp) : '--' ?></span>
+                                    </div>
+
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex flex-wrap justify-content-between align-items-center gap-1 mb-1">
+                                            <span class="cc-badge cc-badge-category">
+                                                <?= myRegistrationEscape($registration['category']) ?>
+                                            </span>
+                                            <span class="cc-badge cc-badge-success">
+                                                Confirmed
+                                            </span>
+                                        </div>
+                                        <div class="small text-muted">
+                                            <?= $eventTimestamp !== false ? date('l &bull; g:i A', $eventTimestamp) : 'Schedule pending' ?>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <h3 class="h5 fw-bold mb-2">
-                                    <a href="/campusconnect/event-details.php?id=<?= (int) $registration['event_id'] ?>" class="text-reset text-decoration-none">
+                                    <a href="/campusconnect/event-details.php?id=<?= (int) $registration['event_id'] ?>" class="text-reset">
                                         <?= myRegistrationEscape($registration['title']) ?>
                                     </a>
                                 </h3>
 
                                 <div class="d-flex align-items-center gap-2 text-secondary small mb-2">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                    <span><?= $eventTimestamp !== false ? date('D, M j, Y, g:i A', $eventTimestamp) : 'TBC' ?></span>
-                                </div>
-
-                                <div class="d-flex align-items-center gap-2 text-secondary small mb-3">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                     <span class="text-truncate"><?= myRegistrationEscape($registration['venue']) ?></span>
                                 </div>
 
                                 <div class="small text-muted mb-3">
-                                    Registered on <?= $registeredTimestamp !== false ? date('M j, Y', $registeredTimestamp) : 'Recently' ?>
+                                    Registered on <?= $registeredTimestamp !== false ? date('d M Y', $registeredTimestamp) : 'Recently' ?>
                                 </div>
 
                                 <div class="d-flex gap-2 mt-auto pt-3 border-top" style="border-color: var(--cc-border) !important;">
                                     <a href="/campusconnect/event-details.php?id=<?= (int) $registration['event_id'] ?>" class="btn cc-btn-outline cc-btn-sm flex-grow-1">
-                                        View Details
+                                        View Event
                                     </a>
 
                                     <form
                                         action="/campusconnect/cancel-registration.php"
                                         method="post"
                                         class="m-0"
-                                        onsubmit="return confirm('Cancel your seat registration for <?= myRegistrationEscape(addslashes($registration['title'])) ?>?');"
+                                        onsubmit="return confirm('Are you sure you want to cancel your seat for <?= myRegistrationEscape(addslashes($registration['title'])) ?>? Your reservation will be released to others.');"
                                     >
                                         <input type="hidden" name="registration_id" value="<?= (int) $registration['registration_id'] ?>">
                                         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken(), ENT_QUOTES, 'UTF-8') ?>">
@@ -184,8 +193,8 @@ require_once __DIR__ . '/includes/header.php';
         <?php if (!empty($pastOrCancelled)): ?>
             <section aria-labelledby="history-heading">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h2 id="history-heading" class="h6 fw-bold mb-0">
-                        Past & Cancelled History (<?= count($pastOrCancelled) ?>)
+                    <h2 id="history-heading" class="h5 fw-bold mb-0">
+                        Past & Cancelled Activity (<?= count($pastOrCancelled) ?>)
                     </h2>
                 </div>
 
@@ -214,7 +223,7 @@ require_once __DIR__ . '/includes/header.php';
                                         $pStatus = 'Event Cancelled by Admin';
                                     } else {
                                         $pBadge = 'cc-badge-neutral';
-                                        $pStatus = 'Concluded';
+                                        $pStatus = 'Event Concluded';
                                     }
                                     ?>
                                     <tr>
@@ -230,7 +239,7 @@ require_once __DIR__ . '/includes/header.php';
                                         </td>
                                         <td>
                                             <span class="small">
-                                                <?= $pTimestamp !== false ? date('M j, Y, g:i A', $pTimestamp) : 'TBC' ?>
+                                                <?= $pTimestamp !== false ? date('d M Y, g:i A', $pTimestamp) : 'TBC' ?>
                                             </span>
                                         </td>
                                         <td>
