@@ -1,35 +1,35 @@
 /**
- * CampusConnect - Editorial Visual System & Design Stylesheet
- * Brand Color: Deep Violet (#6842e8)
- * Palette: Warm white surfaces, dark ink text, lavender accents, restrained green success
+ * CampusConnect - Clean, Modern College Event Management Stylesheet
+ * Brand Color: Collegiate Indigo (#4338ca)
+ * Aesthetic: Minimal, professional, developer-designed, accessible
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-    /* Brand & Accent Colors */
-    --cc-primary: #6842e8;
-    --cc-primary-hover: #5531d4;
-    --cc-primary-dark: #4322b0;
-    --cc-primary-subtle: #f3effe;
-    --cc-primary-light: #ece6fd;
-    --cc-primary-border: #dcd4fa;
+    /* Brand & Primary Colors */
+    --cc-primary: #4338ca;
+    --cc-primary-hover: #3730a3;
+    --cc-primary-dark: #312e81;
+    --cc-primary-subtle: #eef2ff;
+    --cc-primary-light: #e0e7ff;
+    --cc-primary-border: #c7d2fe;
 
     /* Neutrals & Surfaces */
-    --cc-bg: #faf9fd;
+    --cc-bg: #f8fafc;
     --cc-surface: #ffffff;
-    --cc-surface-muted: #f5f4fa;
-    --cc-border: #e9e5f3;
-    --cc-border-strong: #d8d3e7;
-    --cc-text-main: #1d192e;
-    --cc-text-body: #423e55;
-    --cc-text-muted: #6e6a82;
-    --cc-text-light: #9490a6;
+    --cc-surface-muted: #f1f5f9;
+    --cc-border: #e2e8f0;
+    --cc-border-strong: #cbd5e1;
+    --cc-text-main: #0f172a;
+    --cc-text-body: #334155;
+    --cc-text-muted: #64748b;
+    --cc-text-light: #94a3b8;
 
     /* Semantic States */
     --cc-success: #15803d;
-    --cc-success-subtle: #edf8f0;
-    --cc-success-border: #bbf0cb;
+    --cc-success-subtle: #f0fdf4;
+    --cc-success-border: #bbf7d0;
     --cc-warning: #b45309;
     --cc-warning-subtle: #fffbeb;
     --cc-warning-border: #fde68a;
@@ -40,17 +40,17 @@
     --cc-info-subtle: #f0f9ff;
     --cc-info-border: #bae6fd;
 
-    /* Elevation & Radii */
-    --cc-radius-sm: 8px;
-    --cc-radius-md: 12px;
-    --cc-radius-lg: 16px;
-    --cc-radius-xl: 20px;
+    /* Clean, Measured Radii (avoiding overly bubbly corners) */
+    --cc-radius-sm: 6px;
+    --cc-radius-md: 8px;
+    --cc-radius-lg: 10px;
+    --cc-radius-xl: 12px;
     --cc-radius-pill: 9999px;
 
-    --cc-shadow-sm: 0 1px 3px rgba(29, 25, 46, 0.04), 0 1px 2px rgba(29, 25, 46, 0.03);
-    --cc-shadow-md: 0 4px 14px rgba(29, 25, 46, 0.05), 0 1px 3px rgba(29, 25, 46, 0.02);
-    --cc-shadow-lg: 0 10px 28px rgba(29, 25, 46, 0.07), 0 2px 6px rgba(29, 25, 46, 0.03);
-    --cc-shadow-hover: 0 14px 34px rgba(104, 66, 232, 0.12), 0 4px 8px rgba(29, 25, 46, 0.04);
+    /* Subtle, Realistic Shadows */
+    --cc-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --cc-shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --cc-shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Base Document Styles */
@@ -75,10 +75,10 @@ main {
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--cc-text-main);
-    font-family: 'Outfit', 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.25;
+    line-height: 1.3;
 }
 
 /* Links */
@@ -95,11 +95,10 @@ a:hover {
 /* Accessible Focus States */
 :focus-visible {
     outline: 2px solid var(--cc-primary);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 4px rgba(104, 66, 232, 0.15);
+    outline-offset: 2px;
 }
 
-/* Primary & Outline Buttons */
+/* Buttons */
 .cc-btn-primary {
     display: inline-flex;
     align-items: center;
@@ -109,13 +108,12 @@ a:hover {
     color: #ffffff !important;
     border: 1px solid var(--cc-primary);
     border-radius: var(--cc-radius-md);
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     line-height: 1.4;
     text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 6px rgba(104, 66, 232, 0.25);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
     cursor: pointer;
 }
 
@@ -123,13 +121,10 @@ a:hover {
     background-color: var(--cc-primary-hover);
     border-color: var(--cc-primary-hover);
     color: #ffffff !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(104, 66, 232, 0.35);
 }
 
 .cc-btn-primary:active {
     background-color: var(--cc-primary-dark);
-    transform: translateY(0);
 }
 
 .cc-btn-outline {
@@ -138,39 +133,33 @@ a:hover {
     justify-content: center;
     gap: 8px;
     background-color: var(--cc-surface);
-    color: var(--cc-primary) !important;
+    color: var(--cc-text-main) !important;
     border: 1px solid var(--cc-border-strong);
     border-radius: var(--cc-radius-md);
-    padding: 10px 18px;
+    padding: 8px 16px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     line-height: 1.4;
     text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
     cursor: pointer;
 }
 
 .cc-btn-outline:hover {
-    background-color: var(--cc-primary-subtle);
-    border-color: var(--cc-primary-border);
-    color: var(--cc-primary-hover) !important;
-    transform: translateY(-1px);
-}
-
-.cc-btn-outline:active {
-    background-color: var(--cc-primary-light);
-    transform: translateY(0);
+    background-color: var(--cc-surface-muted);
+    border-color: #94a3b8;
+    color: var(--cc-text-main) !important;
 }
 
 .cc-btn-sm {
-    padding: 6px 14px;
-    font-size: 0.85rem;
+    padding: 5px 12px;
+    font-size: 0.84rem;
     border-radius: var(--cc-radius-sm);
 }
 
 .cc-btn-lg {
-    padding: 13px 26px;
-    font-size: 1.05rem;
+    padding: 10px 20px;
+    font-size: 1rem;
     border-radius: var(--cc-radius-md);
 }
 
@@ -180,7 +169,7 @@ a:hover {
     border: 1px solid var(--cc-border);
     border-radius: var(--cc-radius-lg);
     box-shadow: var(--cc-shadow-sm);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .cc-card-interactive {
@@ -188,22 +177,20 @@ a:hover {
 }
 
 .cc-card-interactive:hover {
-    border-color: var(--cc-primary-border);
-    box-shadow: var(--cc-shadow-hover);
-    transform: translateY(-3px);
+    border-color: var(--cc-border-strong);
+    box-shadow: var(--cc-shadow-md);
 }
 
-/* Category Badges & Status Tags */
+/* Badges & Status Tags */
 .cc-badge {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 4px 10px;
-    border-radius: var(--cc-radius-pill);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    text-transform: capitalize;
+    padding: 3px 8px;
+    border-radius: var(--cc-radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     line-height: 1.4;
 }
 
@@ -237,49 +224,33 @@ a:hover {
     border: 1px solid var(--cc-border);
 }
 
-/* Section Eyebrow Header */
+/* Clean Section Tag */
 .cc-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.76rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--cc-primary);
-    margin-bottom: 8px;
-}
-
-.cc-eyebrow::before {
-    content: "";
     display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--cc-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--cc-primary);
+    margin-bottom: 6px;
 }
 
-/* Navigation Styles */
+/* Navigation */
 .cc-navbar {
-    background-color: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--cc-surface);
     border-bottom: 1px solid var(--cc-border);
-    box-shadow: 0 2px 10px rgba(29, 25, 46, 0.03);
-    padding-top: 12px;
-    padding-bottom: 12px;
-    transition: all 0.2s ease;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .cc-brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     color: var(--cc-text-main);
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-decoration: none;
 }
 
@@ -290,75 +261,74 @@ a:hover {
 .cc-brand-mark {
     display: inline-grid;
     place-items: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 11px;
-    background: linear-gradient(135deg, var(--cc-primary), var(--cc-primary-dark));
+    width: 32px;
+    height: 32px;
+    border-radius: var(--cc-radius-sm);
+    background-color: var(--cc-primary);
     color: #ffffff;
-    font-weight: 800;
-    font-size: 1.15rem;
-    box-shadow: 0 4px 10px rgba(104, 66, 232, 0.3);
+    font-weight: 700;
+    font-size: 1rem;
 }
 
 .cc-navbar .nav-link {
     margin: 0 2px;
-    padding: 8px 14px !important;
+    padding: 6px 12px !important;
     border-radius: var(--cc-radius-sm);
     color: var(--cc-text-body);
-    font-size: 0.92rem;
-    font-weight: 600;
-    transition: all 0.18s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .cc-navbar .nav-link:hover {
-    color: var(--cc-primary);
-    background-color: var(--cc-primary-subtle);
+    color: var(--cc-text-main);
+    background-color: var(--cc-surface-muted);
 }
 
 .cc-navbar .nav-link.active {
     color: var(--cc-primary) !important;
     background-color: var(--cc-primary-subtle);
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .cc-user-pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 12px;
+    padding: 4px 10px;
     background: var(--cc-surface-muted);
     border: 1px solid var(--cc-border);
-    border-radius: var(--cc-radius-pill);
-    font-size: 0.88rem;
-    font-weight: 600;
+    border-radius: var(--cc-radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
     color: var(--cc-text-main);
 }
 
 .cc-user-avatar {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
     background: var(--cc-primary);
     color: #fff;
     display: grid;
     place-items: center;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
 }
 
-/* Forms & Inputs */
+/* Form Controls */
 .form-label {
     color: var(--cc-text-main);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .form-control, .form-select {
     border: 1px solid var(--cc-border-strong);
     border-radius: var(--cc-radius-md);
-    padding: 10px 14px;
-    font-size: 0.95rem;
+    padding: 8px 12px;
+    font-size: 0.92rem;
     color: var(--cc-text-main);
     background-color: var(--cc-surface);
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -366,7 +336,7 @@ a:hover {
 
 .form-control:focus, .form-select:focus {
     border-color: var(--cc-primary);
-    box-shadow: 0 0 0 3px rgba(104, 66, 232, 0.14);
+    box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.12);
     outline: none;
 }
 
@@ -377,8 +347,8 @@ a:hover {
 /* Alerts */
 .alert {
     border-radius: var(--cc-radius-md);
-    padding: 14px 18px;
-    font-size: 0.92rem;
+    padding: 12px 16px;
+    font-size: 0.9rem;
     border-width: 1px;
 }
 
@@ -406,12 +376,12 @@ a:hover {
     color: #0c4a6e;
 }
 
-/* Stat & Metric Cards */
+/* Stat Cards */
 .cc-stat-card {
     background: var(--cc-surface);
     border: 1px solid var(--cc-border);
     border-radius: var(--cc-radius-lg);
-    padding: 22px;
+    padding: 18px 20px;
     box-shadow: var(--cc-shadow-sm);
     display: flex;
     flex-direction: column;
@@ -419,25 +389,24 @@ a:hover {
 }
 
 .cc-stat-label {
-    font-size: 0.82rem;
-    font-weight: 700;
+    font-size: 0.78rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     color: var(--cc-text-muted);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .cc-stat-value {
-    font-family: 'Outfit', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 800;
+    font-size: 1.85rem;
+    font-weight: 700;
     color: var(--cc-text-main);
-    line-height: 1.1;
-    margin-bottom: 4px;
+    line-height: 1.2;
+    margin-bottom: 2px;
 }
 
 .cc-stat-desc {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     color: var(--cc-text-muted);
     margin-bottom: 0;
 }
@@ -459,19 +428,19 @@ a:hover {
 .table.cc-table th {
     background: var(--cc-surface-muted);
     color: var(--cc-text-muted);
-    font-size: 0.78rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 14px 18px;
+    letter-spacing: 0.04em;
+    padding: 12px 16px;
     border-bottom: 1px solid var(--cc-border);
     white-space: nowrap;
 }
 
 .table.cc-table td {
-    padding: 16px 18px;
+    padding: 13px 16px;
     color: var(--cc-text-body);
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     vertical-align: middle;
     border-bottom: 1px solid var(--cc-border);
 }
@@ -481,52 +450,50 @@ a:hover {
 }
 
 .table.cc-table tbody tr:hover td {
-    background-color: #faf9fe;
+    background-color: #f8fafc;
 }
 
 /* Empty States */
 .cc-empty-state {
     background: var(--cc-surface);
-    border: 1.5px dashed var(--cc-border-strong);
-    border-radius: var(--cc-radius-xl);
-    padding: 48px 24px;
+    border: 1px dashed var(--cc-border-strong);
+    border-radius: var(--cc-radius-lg);
+    padding: 40px 20px;
     text-align: center;
 }
 
 .cc-empty-icon {
-    width: 58px;
-    height: 58px;
-    border-radius: 16px;
-    background: var(--cc-primary-subtle);
-    color: var(--cc-primary);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--cc-radius-md);
+    background: var(--cc-surface-muted);
+    color: var(--cc-text-muted);
     display: inline-grid;
     place-items: center;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .cc-empty-icon svg {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
 }
 
 /* Footer */
 .cc-footer {
     background: var(--cc-surface);
     border-top: 1px solid var(--cc-border);
-    padding-top: 56px;
-    padding-bottom: 32px;
-    margin-top: 64px;
+    padding-top: 40px;
+    padding-bottom: 24px;
+    margin-top: 56px;
 }
 
 .cc-footer-brand {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     color: var(--cc-text-main);
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-size: 1.1rem;
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -537,18 +504,18 @@ a:hover {
 .cc-footer-desc {
     max-width: 360px;
     color: var(--cc-text-muted);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    margin-top: 14px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-top: 10px;
 }
 
 .cc-footer-heading {
-    font-size: 0.84rem;
-    font-weight: 800;
+    font-size: 0.8rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     color: var(--cc-text-main);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .cc-footer-links {
@@ -556,22 +523,22 @@ a:hover {
     padding: 0;
     margin: 0;
     display: grid;
-    gap: 10px;
+    gap: 8px;
 }
 
 .cc-footer-links a {
     color: var(--cc-text-muted);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     transition: color 0.15s ease;
 }
 
 .cc-footer-links a:hover {
-    color: var(--cc-primary);
+    color: var(--cc-text-main);
 }
 
 .cc-footer-divider {
     border-color: var(--cc-border);
-    margin: 40px 0 24px;
+    margin: 28px 0 20px;
 }
 
 .cc-footer-bottom {
@@ -579,24 +546,24 @@ a:hover {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     color: var(--cc-text-muted);
-    font-size: 0.84rem;
+    font-size: 0.82rem;
 }
 
-/* Admin Subnavigation Bar */
+/* Admin Subnavigation */
 .cc-admin-nav {
     background: var(--cc-surface);
     border-bottom: 1px solid var(--cc-border);
-    padding: 8px 0;
-    margin-bottom: 32px;
+    padding: 6px 0;
+    margin-bottom: 28px;
 }
 
 .cc-admin-nav-list {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -606,27 +573,27 @@ a:hover {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 7px 14px;
+    padding: 6px 12px;
     border-radius: var(--cc-radius-sm);
     color: var(--cc-text-muted);
-    font-size: 0.88rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 500;
     text-decoration: none;
-    transition: all 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .cc-admin-nav-link:hover {
-    color: var(--cc-primary);
-    background: var(--cc-primary-subtle);
+    color: var(--cc-text-main);
+    background: var(--cc-surface-muted);
 }
 
 .cc-admin-nav-link.active {
     color: var(--cc-primary);
     background: var(--cc-primary-subtle);
-    font-weight: 700;
+    font-weight: 600;
 }
 
-/* Progress bar */
+/* Progress track */
 .cc-progress-track {
     width: 100%;
     height: 6px;
@@ -639,18 +606,18 @@ a:hover {
     height: 100%;
     border-radius: var(--cc-radius-pill);
     background-color: var(--cc-primary);
-    transition: width 0.3s ease;
+    transition: width 0.2s ease;
 }
 
 /* Responsive adjustments */
 @media (max-width: 991.98px) {
     .cc-navbar-actions {
-        padding-top: 14px;
-        margin-top: 10px;
+        padding-top: 12px;
+        margin-top: 8px;
         border-top: 1px solid var(--cc-border);
         flex-direction: column;
         align-items: stretch !important;
-        gap: 10px;
+        gap: 8px;
     }
 
     .cc-btn-primary, .cc-btn-outline {

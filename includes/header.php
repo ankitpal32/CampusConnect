@@ -41,14 +41,14 @@ function ccNavActive(bool $isActive): string
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="CampusConnect - Discover college events, workshops, hackathons, and activities. Participate in campus life with real-time registrations.">
+    <meta name="description" content="CampusConnect is a college event management platform. Discover workshops, seminars, and student activities with real-time seat availability.">
 
     <title><?= $escapedTitle ?> | CampusConnect</title>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +63,7 @@ function ccNavActive(bool $isActive): string
 <body>
 
 <header>
-    <nav class="navbar navbar-expand-lg cc-navbar sticky-top" aria-label="Main campus navigation">
+    <nav class="navbar navbar-expand-lg cc-navbar sticky-top" aria-label="Main navigation">
         <div class="container">
 
             <!-- Brand Logo -->
@@ -88,7 +88,7 @@ function ccNavActive(bool $isActive): string
             <!-- Navigation Links -->
             <div class="collapse navbar-collapse" id="ccNavbar">
 
-                <ul class="navbar-nav mx-auto my-3 my-lg-0">
+                <ul class="navbar-nav mx-auto my-2 my-lg-0">
                     <li class="nav-item">
                         <a
                             class="nav-link <?= ccNavActive(!$isAdminSection && $currentPage === 'index.php') ?>"
@@ -105,7 +105,7 @@ function ccNavActive(bool $isActive): string
                             href="/campusconnect/events.php"
                             <?= (!$isAdminSection && $currentPage === 'events.php') ? 'aria-current="page"' : '' ?>
                         >
-                            Explore Events
+                            Events
                         </a>
                     </li>
 
@@ -152,7 +152,7 @@ function ccNavActive(bool $isActive): string
                                     <?= strtoupper(substr($userName, 0, 1)) ?>
                                 </span>
                                 <span><?= $escapedUserName ?></span>
-                                <span class="cc-badge <?= $isAdmin ? 'cc-badge-warning' : 'cc-badge-category' ?>" style="font-size: 0.7rem; padding: 2px 7px;">
+                                <span class="cc-badge <?= $isAdmin ? 'cc-badge-warning' : 'cc-badge-category' ?>" style="font-size: 0.7rem; padding: 2px 6px;">
                                     <?= $isAdmin ? 'Admin' : 'Student' ?>
                                 </span>
                             </span>
@@ -170,12 +170,12 @@ function ccNavActive(bool $isActive): string
                         </div>
 
                     <?php else: ?>
-                        <a class="btn cc-btn-outline" href="/campusconnect/login.php">
-                            Log in
+                        <a class="btn cc-btn-outline cc-btn-sm" href="/campusconnect/login.php">
+                            Sign in
                         </a>
 
-                        <a class="btn cc-btn-primary" href="/campusconnect/register.php">
-                            Join CampusConnect
+                        <a class="btn cc-btn-primary cc-btn-sm" href="/campusconnect/register.php">
+                            Create account
                         </a>
                     <?php endif; ?>
 

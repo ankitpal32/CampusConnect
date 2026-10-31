@@ -89,3 +89,4 @@ try {
     header('Location: /campusconnect/admin/attendees.php?event_id=' . $eventId);
     exit;
 }
+

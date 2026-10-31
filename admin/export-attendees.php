@@ -93,3 +93,4 @@ foreach ($attendees as $row) {
 
 fclose($output);
 exit;
+

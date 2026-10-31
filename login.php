@@ -90,26 +90,26 @@ function loginEscape($value): string
 
 <main class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-5 col-xl-4">
+        <div class="col-md-7 col-lg-5 col-xl-4">
 
-            <div class="cc-card p-4 p-md-5 my-md-4">
+            <div class="cc-card p-4 my-md-3">
                 <div class="text-center mb-4">
-                    <span class="cc-brand-mark mx-auto mb-3" style="width: 48px; height: 48px; font-size: 1.4rem;">C</span>
-                    <h1 class="h3 fw-bold mb-1">Welcome Back</h1>
-                    <p class="text-secondary small">
-                        Sign in to manage your campus registrations and discover upcoming events.
+                    <span class="cc-brand-mark mx-auto mb-2">C</span>
+                    <h1 class="h4 fw-bold mb-1">Sign In</h1>
+                    <p class="text-secondary small mb-0">
+                        Enter your credentials to access your CampusConnect account.
                     </p>
                 </div>
 
                 <?php if (isset($_GET['registered'])): ?>
-                    <div class="alert alert-success d-flex align-items-center gap-2 mb-4" role="status">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        <span>Account created successfully. You can now log in below.</span>
+                    <div class="alert alert-success d-flex align-items-center gap-2 mb-3" role="status">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span>Account created. Please log in below.</span>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($errors): ?>
-                    <div class="alert alert-danger mb-4" role="alert">
+                    <div class="alert alert-danger mb-3" role="alert">
                         <ul class="mb-0 ps-3 small">
                             <?php foreach ($errors as $error): ?>
                                 <li><?= loginEscape($error) ?></li>
@@ -145,8 +145,8 @@ function loginEscape($value): string
                             </label>
                             <button
                                 type="button"
-                                class="btn btn-link p-0 text-decoration-none small"
-                                style="color: var(--cc-primary); font-size: 0.8rem;"
+                                class="btn btn-link p-0 text-decoration-none small text-muted"
+                                style="font-size: 0.8rem;"
                                 id="togglePasswordBtn"
                                 aria-label="Toggle password visibility"
                             >
@@ -158,7 +158,7 @@ function loginEscape($value): string
                             id="password"
                             name="password"
                             class="form-control"
-                            placeholder="Enter your password"
+                            placeholder="Enter password"
                             autocomplete="current-password"
                             required
                         >
@@ -169,11 +169,11 @@ function loginEscape($value): string
                     </button>
                 </form>
 
-                <div class="pt-4 mt-4 text-center border-top" style="border-color: var(--cc-border) !important;">
+                <div class="pt-3 mt-4 text-center border-top" style="border-color: var(--cc-border) !important;">
                     <p class="text-secondary small mb-0">
-                        Don't have a student account?
-                        <a href="/campusconnect/register.php" class="fw-bold">
-                            Join CampusConnect
+                        Don't have an account?
+                        <a href="/campusconnect/register.php" class="fw-semibold">
+                            Create account
                         </a>
                     </p>
                 </div>

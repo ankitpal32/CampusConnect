@@ -1,3 +1,4 @@
+
 # Project Phases & Implementation Roadmap — CampusConnect
 
 This document details the progressive development phases of CampusConnect, tracking what has been completed, what decisions were made during each phase, and what remains on the upcoming roadmap.

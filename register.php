@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 150) {
-        $errors[] = 'Please enter a valid college or personal email address.';
+        $errors[] = 'Please enter a valid email address.';
     }
 
     if (strlen($password) < 8 || strlen($password) > 72) {
@@ -89,19 +89,19 @@ function registerEscape($value): string
 
 <main class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-9 col-lg-6 col-xl-5">
+        <div class="col-md-8 col-lg-6 col-xl-5">
 
-            <div class="cc-card p-4 p-md-5 my-md-4">
+            <div class="cc-card p-4 my-md-3">
                 <div class="text-center mb-4">
-                    <span class="cc-brand-mark mx-auto mb-3" style="width: 48px; height: 48px; font-size: 1.4rem;">C</span>
-                    <h1 class="h3 fw-bold mb-1">Create Student Account</h1>
-                    <p class="text-secondary small">
-                        Join CampusConnect to register for university events, track attendance, and explore opportunities.
+                    <span class="cc-brand-mark mx-auto mb-2">C</span>
+                    <h1 class="h4 fw-bold mb-1">Create Student Account</h1>
+                    <p class="text-secondary small mb-0">
+                        Register to reserve seats for college workshops and events.
                     </p>
                 </div>
 
                 <?php if ($errors): ?>
-                    <div class="alert alert-danger mb-4" role="alert">
+                    <div class="alert alert-danger mb-3" role="alert">
                         <ul class="mb-0 ps-3 small">
                             <?php foreach ($errors as $error): ?>
                                 <li><?= registerEscape($error) ?></li>
@@ -129,7 +129,7 @@ function registerEscape($value): string
                             required
                         >
                         <div class="form-text small text-muted">
-                            As you want it to appear on registration lists and certificates.
+                            As you want it to appear on registration records.
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@ function registerEscape($value): string
                             id="email"
                             name="email"
                             class="form-control"
-                            placeholder="student@university.edu"
+                            placeholder="student@college.edu"
                             maxlength="150"
                             autocomplete="email"
                             value="<?= registerEscape($email) ?>"
@@ -157,8 +157,8 @@ function registerEscape($value): string
                             </label>
                             <button
                                 type="button"
-                                class="btn btn-link p-0 text-decoration-none small"
-                                style="color: var(--cc-primary); font-size: 0.8rem;"
+                                class="btn btn-link p-0 text-decoration-none small text-muted"
+                                style="font-size: 0.8rem;"
                                 id="toggleRegisterPasswordBtn"
                             >
                                 Show password
@@ -169,15 +169,12 @@ function registerEscape($value): string
                             id="password"
                             name="password"
                             class="form-control"
-                            placeholder="At least 8 characters"
+                            placeholder="Minimum 8 characters"
                             minlength="8"
                             maxlength="72"
                             autocomplete="new-password"
                             required
                         >
-                        <div class="form-text small text-muted">
-                            Minimum 8 characters. Keep it secure and unique.
-                        </div>
                     </div>
 
                     <div class="mb-4">
@@ -189,7 +186,7 @@ function registerEscape($value): string
                             id="confirm_password"
                             name="confirm_password"
                             class="form-control"
-                            placeholder="Re-enter your password"
+                            placeholder="Re-enter password"
                             minlength="8"
                             maxlength="72"
                             autocomplete="new-password"
@@ -198,14 +195,14 @@ function registerEscape($value): string
                     </div>
 
                     <button type="submit" class="btn cc-btn-primary w-100 py-2">
-                        Create Account & Get Started
+                        Create Account
                     </button>
                 </form>
 
-                <div class="pt-4 mt-4 text-center border-top" style="border-color: var(--cc-border) !important;">
+                <div class="pt-3 mt-4 text-center border-top" style="border-color: var(--cc-border) !important;">
                     <p class="text-secondary small mb-0">
                         Already have an account?
-                        <a href="/campusconnect/login.php" class="fw-bold">
+                        <a href="/campusconnect/login.php" class="fw-semibold">
                             Sign in here
                         </a>
                     </p>

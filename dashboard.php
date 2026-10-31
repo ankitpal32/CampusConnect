@@ -87,62 +87,62 @@ require_once __DIR__ . '/includes/header.php';
 
 <main class="container py-5">
 
-    <!-- Welcome Banner -->
-    <section class="cc-card p-4 p-md-5 mb-5" style="background: linear-gradient(135deg, #f6f1ff 0%, #ffffff 85%); border-color: var(--cc-primary-border);">
+    <!-- Welcome Card -->
+    <section class="cc-card p-4 p-md-4 mb-4 bg-white">
         <div class="row align-items-center g-4">
             <div class="col-lg-8">
-                <span class="cc-eyebrow">STUDENT PORTAL</span>
-                <h1 class="display-6 fw-bold mt-1 mb-2" style="font-family: 'Outfit', sans-serif;">
-                    Welcome back, <?= dashboardEscape($user['name']) ?>!
+                <span class="cc-eyebrow">Student Hub</span>
+                <h1 class="h3 fw-bold mt-1 mb-2">
+                    Welcome back, <?= dashboardEscape($user['name']) ?>
                 </h1>
-                <p class="text-secondary mb-4" style="max-width: 580px; font-size: 1.05rem;">
-                    Track your reserved seats, view event schedules, and discover upcoming college workshops and cultural activities.
+                <p class="text-secondary small mb-3" style="max-width: 580px; line-height: 1.6;">
+                    View your upcoming schedule, manage seat registrations, and find new college workshops and seminars.
                 </p>
 
                 <div class="d-flex flex-wrap gap-2">
-                    <a href="/campusconnect/events.php" class="btn cc-btn-primary">
-                        <span>Discover New Events</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    <a href="/campusconnect/events.php" class="btn cc-btn-primary btn-sm">
+                        <span>Browse Events</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
-                    <a href="/campusconnect/my-registrations.php" class="btn cc-btn-outline">
-                        Manage All Registrations
+                    <a href="/campusconnect/my-registrations.php" class="btn cc-btn-outline btn-sm">
+                        View Registrations
                     </a>
                 </div>
             </div>
 
             <div class="col-lg-4">
-                <div class="p-3 rounded-3 bg-white border" style="border-color: var(--cc-border) !important;">
-                    <div class="d-flex align-items-center gap-3 mb-2">
-                        <div class="cc-brand-mark" style="width: 38px; height: 38px; font-size: 1rem;">
+                <div class="p-3 rounded-2 bg-light border" style="border-color: var(--cc-border) !important;">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <div class="cc-brand-mark" style="width: 32px; height: 32px; font-size: 0.95rem;">
                             <?= strtoupper(substr($user['name'], 0, 1)) ?>
                         </div>
                         <div>
-                            <div class="fw-bold text-dark"><?= dashboardEscape($user['name']) ?></div>
-                            <div class="small text-muted"><?= dashboardEscape($user['email']) ?></div>
+                            <div class="fw-bold text-dark small"><?= dashboardEscape($user['name']) ?></div>
+                            <div class="small text-muted" style="font-size: 0.8rem;"><?= dashboardEscape($user['email']) ?></div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between align-items-center pt-2 mt-2 border-top small" style="border-color: var(--cc-border) !important;">
-                        <span class="text-muted">Account Role:</span>
-                        <span class="cc-badge cc-badge-category">Verified Student</span>
+                        <span class="text-muted">Role:</span>
+                        <span class="cc-badge cc-badge-category">Student</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Real Database Statistics Cards -->
-    <section class="row g-4 mb-5" aria-label="Student overview statistics">
+    <!-- Overview Statistics -->
+    <section class="row g-3 mb-5" aria-label="Student overview statistics">
         <div class="col-sm-6 col-lg-4">
             <article class="cc-stat-card h-100">
                 <span class="cc-stat-label">Upcoming Events</span>
                 <p class="cc-stat-value text-primary"><?= $totalUpcomingEvents ?></p>
-                <p class="cc-stat-desc">Published events scheduled ahead</p>
+                <p class="cc-stat-desc">Scheduled upcoming events you are registered for</p>
             </article>
         </div>
 
         <div class="col-sm-6 col-lg-4">
             <article class="cc-stat-card h-100">
-                <span class="cc-stat-label">Active Registrations</span>
+                <span class="cc-stat-label">Active Bookings</span>
                 <p class="cc-stat-value"><?= $totalActiveRegistrations ?></p>
                 <p class="cc-stat-desc">Confirmed seats currently held</p>
             </article>
@@ -152,20 +152,20 @@ require_once __DIR__ . '/includes/header.php';
             <article class="cc-stat-card h-100">
                 <span class="cc-stat-label">Past & Completed</span>
                 <p class="cc-stat-value text-muted"><?= $totalPastOrCancelled ?></p>
-                <p class="cc-stat-desc">Historical records in system</p>
+                <p class="cc-stat-desc">Concluded or cancelled activity records</p>
             </article>
         </div>
     </section>
 
     <!-- Upcoming Registered Events Section -->
     <section aria-labelledby="upcoming-events-heading">
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-4">
             <div>
-                <h2 id="upcoming-events-heading" class="h4 fw-bold mb-1">
-                    Your Upcoming Schedule
+                <h2 id="upcoming-events-heading" class="h5 fw-bold mb-1">
+                    Your Scheduled Events
                 </h2>
                 <p class="text-secondary small mb-0">
-                    Confirmed seats for events coming up on campus.
+                    Confirmed reservations for upcoming sessions.
                 </p>
             </div>
 
@@ -179,12 +179,12 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="cc-empty-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 </div>
-                <h3 class="h5 fw-bold">You haven't registered for any upcoming events yet</h3>
-                <p class="text-secondary mx-auto" style="max-width: 420px; font-size: 0.95rem;">
-                    Discover departmental seminars, tech hackathons, and student activities currently open for registration.
+                <h3 class="h6 fw-bold">You are not registered for any upcoming events</h3>
+                <p class="text-secondary small mx-auto" style="max-width: 400px;">
+                    Explore current workshops, competitions, and seminars published by college departments.
                 </p>
-                <a href="/campusconnect/events.php" class="btn cc-btn-primary mt-2">
-                    Explore Campus Events
+                <a href="/campusconnect/events.php" class="btn cc-btn-primary btn-sm mt-2">
+                    Browse Events
                 </a>
             </div>
         <?php else: ?>
@@ -205,14 +205,14 @@ require_once __DIR__ . '/includes/header.php';
                             </div>
 
                             <h3 class="h5 fw-bold mb-2">
-                                <a href="/campusconnect/event-details.php?id=<?= (int) $regEvent['id'] ?>" class="text-reset">
+                                <a href="/campusconnect/event-details.php?id=<?= (int) $regEvent['id'] ?>" class="text-reset text-decoration-none">
                                     <?= dashboardEscape($regEvent['title']) ?>
                                 </a>
                             </h3>
 
                             <div class="d-flex align-items-center gap-2 text-secondary small mb-2">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                <span><?= $eventTimestamp !== false ? date('D, d M Y &bull; g:i A', $eventTimestamp) : 'TBC' ?></span>
+                                <span><?= $eventTimestamp !== false ? date('D, M j, Y, g:i A', $eventTimestamp) : 'TBC' ?></span>
                             </div>
 
                             <div class="d-flex align-items-center gap-2 text-secondary small mb-3">
@@ -222,12 +222,12 @@ require_once __DIR__ . '/includes/header.php';
 
                             <div class="d-flex gap-2 mt-auto pt-3 border-top" style="border-color: var(--cc-border) !important;">
                                 <a href="/campusconnect/event-details.php?id=<?= (int) $regEvent['id'] ?>" class="btn cc-btn-outline cc-btn-sm flex-grow-1">
-                                    View Details
+                                    Details
                                 </a>
-                                <form action="/campusconnect/cancel-registration.php" method="post" class="m-0" onsubmit="return confirm('Cancel this event registration? Your slot will be released.');">
+                                <form action="/campusconnect/cancel-registration.php" method="post" class="m-0" onsubmit="return confirm('Cancel this registration? Your reserved seat will be released.');">
                                     <input type="hidden" name="registration_id" value="<?= (int) $regEvent['registration_id'] ?>">
                                     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken(), ENT_QUOTES, 'UTF-8') ?>">
-                                    <button type="submit" class="btn btn-outline-danger cc-btn-sm" title="Cancel your seat registration">
+                                    <button type="submit" class="btn btn-outline-danger cc-btn-sm" title="Cancel your seat reservation">
                                         Cancel
                                     </button>
                                 </form>

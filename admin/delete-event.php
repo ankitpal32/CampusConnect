@@ -84,3 +84,4 @@ try {
     header('Location: /campusconnect/admin/events.php');
     exit;
 }
+

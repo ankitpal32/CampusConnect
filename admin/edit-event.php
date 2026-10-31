@@ -201,31 +201,31 @@ require_once __DIR__ . '/../includes/header.php';
         <ul class="cc-admin-nav-list">
             <li>
                 <a href="/campusconnect/admin/index.php" class="cc-admin-nav-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                     Dashboard
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/events.php" class="cc-admin-nav-link active">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                     Manage Events
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/event-form.php" class="cc-admin-nav-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     Create Event
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/attendees.php?event_id=<?= (int) $eventId ?>" class="cc-admin-nav-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     Attendees (<?= $activeRegistrations ?>)
                 </a>
             </li>
             <li>
                 <a href="/campusconnect/admin/reports.php" class="cc-admin-nav-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                     Reports
                 </a>
             </li>
@@ -237,18 +237,18 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
         <div>
-            <span class="cc-eyebrow">EVENT SETTINGS</span>
-            <h1 class="display-6 fw-bold mt-1 mb-1" style="font-family: 'Outfit', sans-serif;">Edit Event #<?= (int) $eventId ?></h1>
-            <p class="text-secondary mb-0">
+            <span class="cc-eyebrow">Event Settings</span>
+            <h1 class="h3 fw-bold mt-1 mb-1">Edit Event #<?= (int) $eventId ?></h1>
+            <p class="text-secondary small mb-0">
                 Updating details for <strong><?= editEventEscape($event['title']) ?></strong>.
             </p>
         </div>
 
         <div class="d-flex gap-2">
-            <a href="/campusconnect/event-details.php?id=<?= (int) $eventId ?>" class="btn cc-btn-outline" target="_blank">
+            <a href="/campusconnect/event-details.php?id=<?= (int) $eventId ?>" class="btn cc-btn-outline btn-sm" target="_blank">
                 View Public Page &nearr;
             </a>
-            <a href="/campusconnect/admin/attendees.php?event_id=<?= (int) $eventId ?>" class="btn cc-btn-outline">
+            <a href="/campusconnect/admin/attendees.php?event_id=<?= (int) $eventId ?>" class="btn cc-btn-outline btn-sm">
                 View Attendees (<?= $activeRegistrations ?>)
             </a>
         </div>
@@ -256,7 +256,7 @@ require_once __DIR__ . '/../includes/header.php';
 
     <?php if ($errors): ?>
         <div class="alert alert-danger mb-4" role="alert">
-            <div class="fw-bold mb-1">Please address the following issues:</div>
+            <div class="fw-semibold mb-1">Please address the following issues:</div>
             <ul class="mb-0 ps-3 small">
                 <?php foreach ($errors as $error): ?>
                     <li><?= editEventEscape($error) ?></li>
@@ -267,7 +267,7 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="row g-4">
         <div class="col-lg-8">
-            <div class="cc-card p-4 p-md-5">
+            <div class="cc-card p-4">
                 <form method="post" action="/campusconnect/admin/edit-event.php?id=<?= (int) $eventId ?>" novalidate>
                     <input type="hidden" name="csrf_token" value="<?= editEventEscape(csrfToken()) ?>">
 
@@ -302,7 +302,7 @@ require_once __DIR__ . '/../includes/header.php';
 
                         <div class="col-md-6">
                             <label for="venue" class="form-label">
-                                Venue <span class="text-danger">*</span>
+                                Venue Location <span class="text-danger">*</span>
                             </label>
                             <input
                                 type="text"
@@ -375,7 +375,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 required
                             >
                             <div class="form-text small text-muted">
-                                Minimum allowed is <strong><?= $activeRegistrations ?></strong> (current active registrations).
+                                Minimum allowed is <strong><?= $activeRegistrations ?></strong> (confirmed registrations).
                             </div>
                         </div>
 
@@ -405,29 +405,29 @@ require_once __DIR__ . '/../includes/header.php';
 
         <div class="col-lg-4">
             <aside class="cc-card p-4">
-                <h2 class="h5 fw-bold mb-3">Registration Status</h2>
+                <h2 class="h6 fw-bold mb-3">Capacity Status</h2>
 
-                <div class="p-3 rounded-3 mb-3" style="background: var(--cc-surface-muted); border: 1px solid var(--cc-border);">
+                <div class="p-3 rounded-2 mb-3" style="background: var(--cc-surface-muted); border: 1px solid var(--cc-border);">
                     <div class="d-flex justify-content-between mb-1">
                         <span class="small text-muted">Active Registrations</span>
-                        <span class="fw-bold text-dark"><?= $activeRegistrations ?> confirmed</span>
+                        <span class="fw-semibold text-dark small"><?= $activeRegistrations ?> confirmed</span>
                     </div>
                     <div class="d-flex justify-content-between mb-1">
                         <span class="small text-muted">Current Capacity</span>
-                        <span class="fw-bold text-dark"><?= $capacity ?> seats</span>
+                        <span class="fw-semibold text-dark small"><?= $capacity ?> seats</span>
                     </div>
                     <div class="d-flex justify-content-between">
                         <span class="small text-muted">Seats Remaining</span>
-                        <span class="fw-bold text-primary"><?= max(0, (int)$capacity - $activeRegistrations) ?></span>
+                        <span class="fw-semibold text-primary small"><?= max(0, (int)$capacity - $activeRegistrations) ?></span>
                     </div>
                 </div>
 
-                <div class="small text-muted mb-4" style="line-height: 1.6;">
-                    The system prevents reducing capacity below existing confirmed registrations to protect student reservations.
+                <div class="small text-muted mb-3" style="line-height: 1.5;">
+                    The system locks capacity above active confirmed bookings to protect registered students.
                 </div>
 
                 <a href="/campusconnect/admin/attendees.php?event_id=<?= (int) $eventId ?>" class="btn cc-btn-outline w-100 btn-sm">
-                    Review Full Attendee Roll &rarr;
+                    View Attendee List &rarr;
                 </a>
             </aside>
         </div>
