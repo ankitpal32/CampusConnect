@@ -184,3 +184,4 @@ try {
     echo "\n[ERROR] Setup failed: " . $e->getMessage() . "\n";
     exit(1);
 }
+

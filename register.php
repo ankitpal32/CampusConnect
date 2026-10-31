@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 150) {
-        $errors[] = 'Please enter a valid email address.';
+        $errors[] = 'Please enter a valid college or personal email address.';
     }
 
     if (strlen($password) < 8 || strlen($password) > 72) {
@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
             try {
+                // Role is strictly hardcoded to 'student'; visitors cannot assign admin privileges
                 $insert = $pdo->prepare(
                     'INSERT INTO users (name, email, password_hash, role)
                      VALUES (:name, :email, :password_hash, :role)'
@@ -88,20 +89,21 @@ function registerEscape($value): string
 ?>
 
 <main class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 col-xl-5">
+    <div class="row justify-content-center align-items-start g-4">
 
-            <div class="cc-card p-4 my-md-3">
+        <!-- Main Registration Form -->
+        <div class="col-lg-7 col-xl-6">
+            <div class="cc-card p-4 p-md-5">
                 <div class="text-center mb-4">
-                    <span class="cc-brand-mark mx-auto mb-2">C</span>
-                    <h1 class="h4 fw-bold mb-1">Create Student Account</h1>
-                    <p class="text-secondary small mb-0">
-                        Register to reserve seats for college workshops and events.
+                    <span class="cc-brand-mark mx-auto mb-3" style="width: 48px; height: 48px; font-size: 1.4rem;">C</span>
+                    <h1 class="h3 fw-bold mb-1">Create Student Account</h1>
+                    <p class="text-secondary small">
+                        Join CampusConnect to reserve seats for college workshops, hackathons, and festivals.
                     </p>
                 </div>
 
                 <?php if ($errors): ?>
-                    <div class="alert alert-danger mb-3" role="alert">
+                    <div class="alert alert-danger mb-4" role="alert">
                         <ul class="mb-0 ps-3 small">
                             <?php foreach ($errors as $error): ?>
                                 <li><?= registerEscape($error) ?></li>
@@ -110,7 +112,7 @@ function registerEscape($value): string
                     </div>
                 <?php endif; ?>
 
-                <form method="post" action="/campusconnect/register.php" novalidate>
+                <form method="post" action="/campusconnect/register.php" novalidate id="registerForm">
                     <input type="hidden" name="csrf_token" value="<?= registerEscape($_SESSION['csrf_token']) ?>">
 
                     <div class="mb-3">
@@ -129,7 +131,7 @@ function registerEscape($value): string
                             required
                         >
                         <div class="form-text small text-muted">
-                            As you want it to appear on registration records.
+                            As you want it to appear on registration lists and attendee rolls.
                         </div>
                     </div>
 
@@ -142,7 +144,7 @@ function registerEscape($value): string
                             id="email"
                             name="email"
                             class="form-control"
-                            placeholder="student@college.edu"
+                            placeholder="student@university.edu"
                             maxlength="150"
                             autocomplete="email"
                             value="<?= registerEscape($email) ?>"
@@ -157,8 +159,8 @@ function registerEscape($value): string
                             </label>
                             <button
                                 type="button"
-                                class="btn btn-link p-0 text-decoration-none small text-muted"
-                                style="font-size: 0.8rem;"
+                                class="btn btn-link p-0 text-decoration-none small"
+                                style="color: var(--cc-primary); font-size: 0.8rem;"
                                 id="toggleRegisterPasswordBtn"
                             >
                                 Show password
@@ -169,12 +171,15 @@ function registerEscape($value): string
                             id="password"
                             name="password"
                             class="form-control"
-                            placeholder="Minimum 8 characters"
+                            placeholder="At least 8 characters"
                             minlength="8"
                             maxlength="72"
                             autocomplete="new-password"
                             required
                         >
+                        <div class="form-text small text-muted">
+                            Minimum 8 characters. Keep it secure and unique.
+                        </div>
                     </div>
 
                     <div class="mb-4">
@@ -186,7 +191,7 @@ function registerEscape($value): string
                             id="confirm_password"
                             name="confirm_password"
                             class="form-control"
-                            placeholder="Re-enter password"
+                            placeholder="Re-enter your password"
                             minlength="8"
                             maxlength="72"
                             autocomplete="new-password"
@@ -195,21 +200,57 @@ function registerEscape($value): string
                     </div>
 
                     <button type="submit" class="btn cc-btn-primary w-100 py-2">
-                        Create Account
+                        Create Account & Get Started
                     </button>
                 </form>
 
-                <div class="pt-3 mt-4 text-center border-top" style="border-color: var(--cc-border) !important;">
+                <div class="pt-4 mt-4 text-center border-top" style="border-color: var(--cc-border) !important;">
                     <p class="text-secondary small mb-0">
                         Already have an account?
-                        <a href="/campusconnect/login.php" class="fw-semibold">
+                        <a href="/campusconnect/login.php" class="fw-bold">
                             Sign in here
                         </a>
                     </p>
                 </div>
             </div>
-
         </div>
+
+        <!-- Helpful Side Panel: Public-First Notice & Demo Account Shortcut -->
+        <div class="col-lg-5 col-xl-4">
+            <aside class="d-grid gap-3">
+
+                <!-- Notice 1: Public Discovery First -->
+                <div class="cc-card p-4" style="background: #ffffff; border: 1px solid var(--cc-border);">
+                    <div class="d-flex align-items-center gap-2 text-primary fw-bold mb-2">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span>No account needed to browse</span>
+                    </div>
+                    <p class="small text-secondary mb-3" style="line-height: 1.6;">
+                        You can freely explore the homepage, search events, filter categories, and check seat availability without creating an account. Sign up only when you are ready to reserve a seat.
+                    </p>
+                    <a href="/campusconnect/events.php" class="small fw-bold text-primary text-decoration-none">
+                        Explore Published Events &rarr;
+                    </a>
+                </div>
+
+                <!-- Notice 2: Demo Reviewer Shortcut -->
+                <div class="cc-card p-4" style="background: var(--cc-surface-muted); border: 1px solid var(--cc-primary-border);">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span class="cc-eyebrow mb-0">EVALUATING CAMPUSCONNECT?</span>
+                        <span class="cc-badge cc-badge-category" style="font-size: 0.68rem;">Demo</span>
+                    </div>
+                    <h3 class="h6 fw-bold mb-2 text-dark">Already have a demo account?</h3>
+                    <p class="small text-secondary mb-3" style="line-height: 1.6;">
+                        If you are reviewing or evaluating the platform, preconfigured demonstration accounts are ready for testing both student registration and administrative management.
+                    </p>
+                    <a href="/campusconnect/login.php" class="btn cc-btn-outline cc-btn-sm w-100">
+                        Try Demo on Sign In &rarr;
+                    </a>
+                </div>
+
+            </aside>
+        </div>
+
     </div>
 </main>
 

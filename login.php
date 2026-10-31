@@ -27,6 +27,13 @@ $isDemoEnvironment = in_array($hostName, ['localhost', '127.0.0.1', '::1'], true
     || (getenv('APP_ENV') === 'development')
     || (getenv('CAMPUSCONNECT_DEMO') === '1');
 
+// Preconfigured demo account credentials
+$demoStudentEmail = 'demo.student@campusconnect.edu';
+$demoStudentPassword = 'StudentDemo@2026';
+
+$demoAdminEmail = 'demo.admin@campusconnect.edu';
+$demoAdminPassword = 'AdminDemo@2026';
+
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -98,14 +105,14 @@ function loginEscape($value): string
 <main class="container py-5">
     <div class="row justify-content-center align-items-start g-4">
 
-        <!-- Sign In Card -->
+        <!-- Main Sign In Form Card -->
         <div class="<?= $isDemoEnvironment ? 'col-lg-6 col-xl-5' : 'col-md-8 col-lg-5 col-xl-4' ?>">
             <div class="cc-card p-4 p-md-5">
                 <div class="text-center mb-4">
                     <span class="cc-brand-mark mx-auto mb-3" style="width: 48px; height: 48px; font-size: 1.4rem;">C</span>
                     <h1 class="h3 fw-bold mb-1">Welcome Back</h1>
                     <p class="text-secondary small">
-                        Sign in to manage your campus registrations and discover upcoming events.
+                        Sign in to manage your campus registrations and schedule.
                     </p>
                 </div>
 
@@ -188,75 +195,101 @@ function loginEscape($value): string
             </div>
         </div>
 
-        <!-- Demo Accounts Section (Shown only in Local/Development Environment) -->
+        <!-- Just Exploring? Try the Demo Section (Shown only in Local/Demo Environment) -->
         <?php if ($isDemoEnvironment): ?>
             <div class="col-lg-6 col-xl-5">
-                <aside class="cc-card p-4 p-md-5" style="background: var(--cc-surface); border: 1px solid var(--cc-primary-border); box-shadow: var(--cc-shadow-md);">
+                <aside class="cc-card p-4 p-md-5" style="border: 1px solid var(--cc-primary-border); background: #ffffff;">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <span class="cc-eyebrow mb-0">REVIEWER ENVIRONMENT</span>
-                        <span class="cc-badge cc-badge-category" style="font-size: 0.72rem;">Demo Sandbox</span>
+                        <span class="cc-eyebrow mb-0">DEMO ACCESS</span>
+                        <span class="cc-badge cc-badge-category" style="font-size: 0.72rem;">Preconfigured</span>
                     </div>
 
-                    <h2 class="h4 fw-bold mb-2">Explore Demo Accounts</h2>
+                    <h2 class="h4 fw-bold mb-2">Just exploring? Try the demo</h2>
                     <p class="text-secondary small mb-4" style="line-height: 1.6;">
-                        Evaluating CampusConnect? Use these preconfigured demonstration accounts to test both student and administrator workflows without manual registration.
+                        Reviewing CampusConnect? Use these preconfigured demonstration accounts to experience student and organizer features without signing up.
                     </p>
 
-                    <!-- Account 1: Demo Administrator -->
+                    <!-- Account 1: Demo Student -->
                     <div class="p-3 rounded-3 mb-3" style="background: var(--cc-surface-muted); border: 1px solid var(--cc-border);">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <div class="d-flex align-items-center gap-2">
-                                    <strong class="text-dark">Campus Coordinator</strong>
-                                    <span class="cc-badge cc-badge-warning" style="font-size: 0.7rem; padding: 2px 7px;">Admin Role</span>
+                                    <strong class="text-dark">1. Demo Student</strong>
+                                    <span class="cc-badge cc-badge-category" style="font-size: 0.7rem; padding: 2px 7px;">Student Role</span>
                                 </div>
-                                <div class="small text-muted font-monospace mt-1">demo.admin@campusconnect.edu</div>
+                                <div class="small text-muted mt-1">Explore events, register and view registrations.</div>
                             </div>
+                        </div>
 
+                        <div class="p-2 px-3 rounded-2 bg-white border small font-monospace d-flex justify-content-between align-items-center mb-2" style="border-color: var(--cc-border) !important;">
+                            <div>
+                                <span class="text-secondary"><?= $demoStudentEmail ?></span>
+                                <span class="text-muted mx-1">&bull;</span>
+                                <span class="text-dark fw-semibold"><?= $demoStudentPassword ?></span>
+                            </div>
                             <button
                                 type="button"
-                                class="btn cc-btn-outline cc-btn-sm"
-                                onclick="fillCredentials('demo.admin@campusconnect.edu', 'AdminDemo@2026')"
-                                title="Auto-fill credentials in sign in form"
+                                class="btn btn-link text-primary p-0 small text-decoration-none"
+                                onclick="copyCredentials('<?= $demoStudentEmail ?>', '<?= $demoStudentPassword ?>', this)"
+                                title="Copy email and password"
                             >
-                                Use Account
+                                Copy
                             </button>
                         </div>
 
-                        <div class="small text-secondary pt-2 border-top" style="border-color: var(--cc-border) !important; line-height: 1.5;">
-                            <strong>Capabilities:</strong> Full CRUD event management, safe deletion, attendee check-in at the door, CSV exports, and platform reports.
+                        <div class="d-flex justify-content-end">
+                            <button
+                                type="button"
+                                class="btn cc-btn-outline cc-btn-sm"
+                                onclick="fillCredentials('<?= $demoStudentEmail ?>', '<?= $demoStudentPassword ?>')"
+                            >
+                                Fill Student Credentials
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Account 2: Demo Student -->
+                    <!-- Account 2: Demo Admin -->
                     <div class="p-3 rounded-3 mb-4" style="background: var(--cc-surface-muted); border: 1px solid var(--cc-border);">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <div class="d-flex align-items-center gap-2">
-                                    <strong class="text-dark">Alex Rivera</strong>
-                                    <span class="cc-badge cc-badge-category" style="font-size: 0.7rem; padding: 2px 7px;">Student Role</span>
+                                    <strong class="text-dark">2. Demo Admin</strong>
+                                    <span class="cc-badge cc-badge-warning" style="font-size: 0.7rem; padding: 2px 7px;">Admin Role</span>
                                 </div>
-                                <div class="small text-muted font-monospace mt-1">demo.student@campusconnect.edu</div>
+                                <div class="small text-muted mt-1">Explore event management, attendees and reports.</div>
                             </div>
+                        </div>
 
+                        <div class="p-2 px-3 rounded-2 bg-white border small font-monospace d-flex justify-content-between align-items-center mb-2" style="border-color: var(--cc-border) !important;">
+                            <div>
+                                <span class="text-secondary"><?= $demoAdminEmail ?></span>
+                                <span class="text-muted mx-1">&bull;</span>
+                                <span class="text-dark fw-semibold"><?= $demoAdminPassword ?></span>
+                            </div>
                             <button
                                 type="button"
-                                class="btn cc-btn-outline cc-btn-sm"
-                                onclick="fillCredentials('demo.student@campusconnect.edu', 'StudentDemo@2026')"
-                                title="Auto-fill credentials in sign in form"
+                                class="btn btn-link text-primary p-0 small text-decoration-none"
+                                onclick="copyCredentials('<?= $demoAdminEmail ?>', '<?= $demoAdminPassword ?>', this)"
+                                title="Copy email and password"
                             >
-                                Use Account
+                                Copy
                             </button>
                         </div>
 
-                        <div class="small text-secondary pt-2 border-top" style="border-color: var(--cc-border) !important; line-height: 1.5;">
-                            <strong>Capabilities:</strong> Public event browsing, 1-click atomic seat registration, schedule tracking on Student Dashboard, and IDOR-safe cancellation.
+                        <div class="d-flex justify-content-end">
+                            <button
+                                type="button"
+                                class="btn cc-btn-outline cc-btn-sm"
+                                onclick="fillCredentials('<?= $demoAdminEmail ?>', '<?= $demoAdminPassword ?>')"
+                            >
+                                Fill Admin Credentials
+                            </button>
                         </div>
                     </div>
 
-                    <div class="p-2 px-3 rounded-2 text-muted small" style="background: var(--cc-primary-subtle); border: 1px solid var(--cc-primary-border);">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary me-1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                        <span>Clicking <strong>Use Account</strong> loads credentials into the form. Password hashing and CSRF validation are enforced normally on submit.</span>
+                    <div class="small text-muted d-flex align-items-start gap-2" style="line-height: 1.5;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary mt-1 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span>These are isolated demonstration accounts for testing. Passwords are verified securely on submission using <code>password_verify()</code>.</span>
                     </div>
                 </aside>
             </div>
@@ -293,11 +326,27 @@ function fillCredentials(email, password) {
             toggleBtn.textContent = 'Show password';
         }
 
-        // Visual subtle pulse on the sign in button to indicate readiness
         const submitBtn = document.querySelector('#loginForm button[type="submit"]');
         if (submitBtn) {
             submitBtn.focus();
         }
+    }
+}
+
+function copyCredentials(email, password, btnElement) {
+    const textToCopy = `Email: ${email}\nPassword: ${password}`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalText = btnElement.textContent;
+            btnElement.textContent = 'Copied!';
+            setTimeout(() => {
+                btnElement.textContent = originalText;
+            }, 2000);
+        }).catch(() => {
+            fillCredentials(email, password);
+        });
+    } else {
+        fillCredentials(email, password);
     }
 }
 </script>
