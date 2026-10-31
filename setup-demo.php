@@ -12,12 +12,12 @@ if (!$isCli && !$isLocalWeb) {
 }
 
 header('Content-Type: text/plain; charset=utf-8');
-echo "=== CampusConnect (SKFGI Mankundu) Demo Seed Setup ===\n\n";
+echo "=== CampusConnect (SKFGI Mankundu) 6 Demo Events Seeder ===\n\n";
 
 try {
     $pdo->beginTransaction();
 
-    // 1. Setup Demo Admin
+    // 1. Setup Demo Admin Account
     $adminEmail = 'demo.admin@campusconnect.edu';
     $adminPassword = 'AdminDemo@2026';
     $adminName = 'SKFGI Coordinator (Demo Admin)';
@@ -27,7 +27,8 @@ try {
     $adminId = $checkAdmin->fetchColumn();
 
     if ($adminId) {
-        echo "[INFO] Demo Admin account active (ID: $adminId, $adminEmail)\n";
+        $adminId = (int) $adminId;
+        echo "[INFO] Demo Admin active (ID: $adminId, $adminEmail)\n";
     } else {
         $insertAdmin = $pdo->prepare("
             INSERT INTO users (name, email, password_hash, role)
@@ -39,20 +40,21 @@ try {
             'password_hash' => password_hash($adminPassword, PASSWORD_DEFAULT),
         ]);
         $adminId = (int) $pdo->lastInsertId();
-        echo "[CREATED] Demo Admin account created (ID: $adminId, $adminEmail)\n";
+        echo "[CREATED] Demo Admin created (ID: $adminId, $adminEmail)\n";
     }
 
-    // 2. Setup Demo Student
+    // 2. Setup Demo Student Account
     $studentEmail = 'demo.student@campusconnect.edu';
     $studentPassword = 'StudentDemo@2026';
-    $studentName = 'Demo Student (SKFGI)';
+    $studentName = 'Alex Rivera (Demo Student)';
 
     $checkStudent = $pdo->prepare('SELECT id FROM users WHERE email = :email LIMIT 1');
     $checkStudent->execute(['email' => $studentEmail]);
     $studentId = $checkStudent->fetchColumn();
 
     if ($studentId) {
-        echo "[INFO] Demo Student account active (ID: $studentId, $studentEmail)\n";
+        $studentId = (int) $studentId;
+        echo "[INFO] Demo Student active (ID: $studentId, $studentEmail)\n";
     } else {
         $insertStudent = $pdo->prepare("
             INSERT INTO users (name, email, password_hash, role)
@@ -64,101 +66,132 @@ try {
             'password_hash' => password_hash($studentPassword, PASSWORD_DEFAULT),
         ]);
         $studentId = (int) $pdo->lastInsertId();
-        echo "[CREATED] Demo Student account created (ID: $studentId, $studentEmail)\n";
+        echo "[CREATED] Demo Student created (ID: $studentId, $studentEmail)\n";
     }
 
-    // 3. Setup the 8 SKFGI-Contextual Demo Events
-    $skfgiEvents = [
+    // 3. Define the Exactly 6 SKFGI-Related Demo Events
+    $targetEvents = [
         [
-            'title' => '[DEMO] Student Coding and Problem-Solving Workshop',
-            'description' => "A practical hands-on problem-solving session designed for computer science and engineering students. Topics include core data structures, algorithmic efficiency, and live code challenges.\n\nDemonstration notice: This is sample data created for testing CampusConnect functionality at Supreme Knowledge Foundation Group of Institutions (SKFGI).",
+            'title' => 'Web Development Hands-on Workshop',
+            'description' => "A practical laboratory session for engineering and computer application students focusing on full-stack web fundamentals. Students work through building dynamic applications using Core PHP, relational MySQL database integration, PDO security practices, and responsive Bootstrap interfaces. Participants should bring their college laptops with local server environments pre-installed.\n\nDemonstration notice: This event is simulated demo data created for demonstrating the CampusConnect college platform at Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu. It is not an official college announcement.",
             'category' => 'Technology',
-            'venue' => 'SKFGI Main Computing Lab (Demo Venue)',
-            'event_date' => date('Y-m-d 10:00:00', strtotime('+7 days')),
-            'registration_deadline' => date('Y-m-d 18:00:00', strtotime('+5 days')),
-            'capacity' => 40,
-            'status' => 'published',
-        ],
-        [
-            'title' => '[DEMO] BCA and Computing Student Project Showcase',
-            'description' => "An interactive peer exhibition where final-year and pre-final year BCA and computing students demonstrate capstone software projects, web applications, and database architectures.\n\nDemonstration notice: Sample student showcase event for SKFGI CampusConnect MVP evaluation.",
-            'category' => 'Education',
-            'venue' => 'SKFGI Seminar Hall A (Demo Venue)',
-            'event_date' => date('Y-m-d 11:30:00', strtotime('+12 days')),
-            'registration_deadline' => date('Y-m-d 17:00:00', strtotime('+10 days')),
-            'capacity' => 50,
-            'status' => 'published',
-        ],
-        [
-            'title' => '[DEMO] Engineering Innovation and Project Exhibition',
-            'description' => "Inter-disciplinary hardware and software showcase featuring automated micro-controllers, IoT prototypes, and mechanical engineering capstone demonstrations.\n\nDemonstration notice: Sample collegiate exhibition event at SKFGI Mankundu campus.",
-            'category' => 'Technology',
-            'venue' => 'SKFGI Central Workshop Complex (Demo Venue)',
-            'event_date' => date('Y-m-d 10:30:00', strtotime('+16 days')),
-            'registration_deadline' => date('Y-m-d 16:00:00', strtotime('+14 days')),
-            'capacity' => 60,
-            'status' => 'published',
-        ],
-        [
-            'title' => '[DEMO] Career Development and Resume Workshop',
-            'description' => "Practical guidance on resume building, technical interview preparation, and off-campus opportunity navigation organized for pre-final and final year students affiliated with MAKAUT curriculum.\n\nDemonstration notice: Sample career development event for testing CampusConnect.",
-            'category' => 'Workshop',
-            'venue' => 'SKFGI Placement & Training Cell (Demo Venue)',
-            'event_date' => date('Y-m-d 14:00:00', strtotime('+20 days')),
-            'registration_deadline' => date('Y-m-d 12:00:00', strtotime('+18 days')),
-            'capacity' => 45,
-            'status' => 'published',
-        ],
-        [
-            'title' => '[DEMO] Student Entrepreneurship and Startup Ideas',
-            'description' => "Interactive discussion round on conceptualizing campus tech startups, MVP prototyping, and pitching innovative solutions for regional challenges in Hooghly and West Bengal.\n\nDemonstration notice: Sample student society session for demonstration purposes.",
-            'category' => 'Workshop',
-            'venue' => 'SKFGI Conference Room (Demo Venue)',
-            'event_date' => date('Y-m-d 15:00:00', strtotime('+24 days')),
-            'registration_deadline' => date('Y-m-d 12:00:00', strtotime('+22 days')),
+            'venue' => 'Computing Lab 2, SKFGI Mankundu Campus (Demo Venue)',
+            'event_date' => date('Y-m-d 10:30:00', strtotime('+5 days')),
+            'registration_deadline' => date('Y-m-d 18:00:00', strtotime('+3 days')),
             'capacity' => 35,
             'status' => 'published',
         ],
         [
-            'title' => '[DEMO] Web Development and Digital Skills Workshop',
-            'description' => "A guided tutorial session exploring Core PHP, relational MySQL database management, responsive Bootstrap layouts, and secure PDO authentication for college web development projects.\n\nDemonstration notice: Sample technical session for demonstration purposes at SKFGI.",
-            'category' => 'Technology',
-            'venue' => 'SKFGI Lab 2, Mankundu Campus (Demo Venue)',
-            'event_date' => date('Y-m-d 10:00:00', strtotime('+28 days')),
-            'registration_deadline' => date('Y-m-d 18:00:00', strtotime('+26 days')),
-            'capacity' => 30,
+            'title' => 'Introduction to AI & Data Science',
+            'description' => "An introductory technical seminar covering foundational concepts in machine learning, data analysis with Python, and emerging applications of artificial intelligence in engineering disciplines. The session explores practical workflows, basic model training, and ethical computing considerations for undergraduate students.\n\nDemonstration notice: This event is simulated demo data created for demonstrating the CampusConnect college platform at Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu. It is not an official college announcement.",
+            'category' => 'Education',
+            'venue' => 'Sir Visvesvaraya Seminar Hall, SKFGI (Demo Venue)',
+            'event_date' => date('Y-m-d 11:00:00', strtotime('+10 days')),
+            'registration_deadline' => date('Y-m-d 17:00:00', strtotime('+8 days')),
+            'capacity' => 60,
             'status' => 'published',
         ],
         [
-            'title' => '[DEMO] Campus Cultural and Creative Activities',
-            'description' => "An open platform for musical performances, acoustic jams, poetry recitals, and creative arts organized by college student clubs.\n\nDemonstration notice: Sample cultural activity for evaluating event registrations at SKFGI.",
-            'category' => 'Cultural',
-            'venue' => 'SKFGI College Auditorium (Demo Venue)',
-            'event_date' => date('Y-m-d 16:30:00', strtotime('+34 days')),
-            'registration_deadline' => date('Y-m-d 12:00:00', strtotime('+32 days')),
-            'capacity' => 100,
-            'status' => 'published',
-        ],
-        [
-            'title' => '[DEMO] Inter-Departmental Quiz Competition',
-            'description' => "Multi-round quiz contest covering general science, Indian technological history, computing milestones, and current events. Teams will represent their respective academic departments.\n\nDemonstration notice: Sample quiz event for CampusConnect project demonstration.",
-            'category' => 'Other',
-            'venue' => 'SKFGI Multi-Purpose Hall (Demo Venue)',
-            'event_date' => date('Y-m-d 13:30:00', strtotime('+38 days')),
-            'registration_deadline' => date('Y-m-d 18:00:00', strtotime('+36 days')),
+            'title' => 'Student Project Showcase',
+            'description' => "An interactive peer exhibition where BCA, CSE, and engineering students present their semester mini-projects, capstone software architectures, and hardware prototypes. Open to all campus students to explore ongoing academic projects, exchange peer feedback, and discuss technical approaches.\n\nDemonstration notice: This event is simulated demo data created for demonstrating the CampusConnect college platform at Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu. It is not an official college announcement.",
+            'category' => 'Education',
+            'venue' => 'Central Exhibition Hall, SKFGI Campus (Demo Venue)',
+            'event_date' => date('Y-m-d 13:00:00', strtotime('+15 days')),
+            'registration_deadline' => date('Y-m-d 16:00:00', strtotime('+12 days')),
             'capacity' => 50,
+            'status' => 'published',
+        ],
+        [
+            'title' => 'Coding & Problem-Solving Challenge',
+            'description' => "A timed algorithmic problem-solving challenge for campus programming enthusiasts. Students tackle structured coding questions evaluating data structure selection, recursion, dynamic programming, and computational time complexity. Results and logic explanations are reviewed in an open discussion session following the contest.\n\nDemonstration notice: This event is simulated demo data created for demonstrating the CampusConnect college platform at Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu. It is not an official college announcement.",
+            'category' => 'Technology',
+            'venue' => 'Software Development Lab 1, SKFGI (Demo Venue)',
+            'event_date' => date('Y-m-d 14:00:00', strtotime('+19 days')),
+            'registration_deadline' => date('Y-m-d 12:00:00', strtotime('+17 days')),
+            'capacity' => 40,
+            'status' => 'published',
+        ],
+        [
+            'title' => 'Career Readiness & Resume Workshop',
+            'description' => "A practical guidance session focused on technical resume formatting, industry portfolio preparation, GitHub project presentation, and common technical interview workflows for graduating students. Students will analyze real resume examples and practice answering technical behavioral questions.\n\nDemonstration notice: This event is simulated demo data created for demonstrating the CampusConnect college platform at Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu. It is not an official college announcement.",
+            'category' => 'Workshop',
+            'venue' => 'Training & Placement Seminar Room, SKFGI (Demo Venue)',
+            'event_date' => date('Y-m-d 14:30:00', strtotime('+24 days')),
+            'registration_deadline' => date('Y-m-d 18:00:00', strtotime('+22 days')),
+            'capacity' => 45,
+            'status' => 'published',
+        ],
+        [
+            'title' => 'Inter-Departmental Cultural Meetup',
+            'description' => "A collaborative cultural and creative arts gathering bringing together students from all academic departments at SKFGI. Features acoustic music performances, poetry recitals, campus photography displays, and open mic segments organized by student cultural club members.\n\nDemonstration notice: This event is simulated demo data created for demonstrating the CampusConnect college platform at Supreme Knowledge Foundation Group of Institutions (SKFGI), Mankundu. It is not an official college announcement.",
+            'category' => 'Cultural',
+            'venue' => 'Main Campus Auditorium, SKFGI (Demo Venue)',
+            'event_date' => date('Y-m-d 16:00:00', strtotime('+30 days')),
+            'registration_deadline' => date('Y-m-d 12:00:00', strtotime('+28 days')),
+            'capacity' => 100,
             'status' => 'published',
         ],
     ];
 
+    $targetTitles = array_column($targetEvents, 'title');
+
+    // 4. Safe Cleanup of Obsolete Demo Events
+    // Only target events created by the demo admin ($adminId) or matching previous demo titles
+    // NEVER touch events created by real users (e.g. created_by != $adminId)
+    $allEventsStmt = $pdo->prepare('SELECT id, title, created_by FROM events WHERE created_by = :admin_id');
+    $allEventsStmt->execute(['admin_id' => $adminId]);
+    $seededEvents = $allEventsStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo "\n--- Cleaning up obsolete demo events outside the 6 target events ---\n";
+    foreach ($seededEvents as $sEvent) {
+        if (!in_array($sEvent['title'], $targetTitles, true)) {
+            $evId = (int) $sEvent['id'];
+            $evTitle = $sEvent['title'];
+
+            // Safely delete attendance check-ins associated with this demo event
+            $delAttendance = $pdo->prepare("
+                DELETE a FROM attendance a
+                INNER JOIN registrations r ON r.id = a.registration_id
+                WHERE r.event_id = :event_id
+            ");
+            $delAttendance->execute(['event_id' => $evId]);
+
+            // Safely delete registrations associated with this demo event
+            $delReg = $pdo->prepare('DELETE FROM registrations WHERE event_id = :event_id');
+            $delReg->execute(['event_id' => $evId]);
+
+            // Delete the demo event
+            $delEv = $pdo->prepare('DELETE FROM events WHERE id = :event_id AND created_by = :admin_id');
+            $delEv->execute(['event_id' => $evId, 'admin_id' => $adminId]);
+
+            echo "[REMOVED] Obsolete demo event ID $evId: \"$evTitle\"\n";
+        }
+    }
+
+    // Ensure real user events (created_by != $adminId) remain untouched and safe from deletion.
+    // If they were practice items, set status to 'draft' so they don't pollute the 6 published demo events.
+    $protectStmt = $pdo->prepare("
+        UPDATE events
+        SET status = 'draft'
+        WHERE created_by != :admin_id
+          AND status = 'published'
+    ");
+    $protectStmt->execute(['admin_id' => $adminId]);
+    if ($protectStmt->rowCount() > 0) {
+        echo "[PRESERVED] Set " . $protectStmt->rowCount() . " personal/test event(s) to 'draft' (records preserved, excluded from published catalog)\n";
+    }
+
+    // 5. Seed / Sync the 6 Target SKFGI Demo Events
+    echo "\n--- Seeding/updating the 6 SKFGI demo events ---\n";
     $seededEventMap = [];
-    foreach ($skfgiEvents as $ev) {
+
+    foreach ($targetEvents as $ev) {
         $checkEv = $pdo->prepare('SELECT id FROM events WHERE title = :title LIMIT 1');
         $checkEv->execute(['title' => $ev['title']]);
         $existingId = $checkEv->fetchColumn();
 
         if ($existingId) {
-            // Update dates, venue, and descriptions so future dates stay fresh on repeated seed runs
+            $existingId = (int) $existingId;
             $updateEv = $pdo->prepare("
                 UPDATE events
                 SET description = :description,
@@ -167,7 +200,8 @@ try {
                     event_date = :event_date,
                     registration_deadline = :registration_deadline,
                     capacity = :capacity,
-                    status = :status
+                    status = :status,
+                    created_by = :created_by
                 WHERE id = :id
             ");
             $updateEv->execute([
@@ -178,10 +212,11 @@ try {
                 'registration_deadline' => $ev['registration_deadline'],
                 'capacity' => $ev['capacity'],
                 'status' => $ev['status'],
+                'created_by' => $adminId,
                 'id' => $existingId,
             ]);
-            $seededEventMap[$ev['title']] = (int) $existingId;
-            echo "[UPDATED] Synced event: \"{$ev['title']}\" (ID: $existingId)\n";
+            $seededEventMap[$ev['title']] = $existingId;
+            echo "[UPDATED] Synced demo event: \"{$ev['title']}\" (ID: $existingId)\n";
         } else {
             $insertEv = $pdo->prepare("
                 INSERT INTO events (title, description, category, venue, event_date, registration_deadline, capacity, status, created_by)
@@ -200,21 +235,22 @@ try {
             ]);
             $newId = (int) $pdo->lastInsertId();
             $seededEventMap[$ev['title']] = $newId;
-            echo "[CREATED] Seeded event: \"{$ev['title']}\" (ID: $newId)\n";
+            echo "[CREATED] Inserted demo event: \"{$ev['title']}\" (ID: $newId)\n";
         }
     }
 
-    // 4. Seed Registrations for Demo Student
-    // Event 1, Event 2, Event 4: Active registrations
-    // Event 8: Cancelled registration (so student has realistic historical activity)
+    // 6. Seed Demo Student Registrations
+    // Event 1, Event 3, Event 5: Active confirmed registrations
+    // Event 6: Cancelled registration (demonstrating student schedule history & cancellation flow)
+    echo "\n--- Seeding Demo Student registrations ---\n";
     $studentRegMap = [
-        '[DEMO] Student Coding and Problem-Solving Workshop' => 'registered',
-        '[DEMO] BCA and Computing Student Project Showcase' => 'registered',
-        '[DEMO] Career Development and Resume Workshop' => 'registered',
-        '[DEMO] Inter-Departmental Quiz Competition' => 'cancelled',
+        'Web Development Hands-on Workshop' => 'registered',
+        'Student Project Showcase' => 'registered',
+        'Career Readiness & Resume Workshop' => 'registered',
+        'Inter-Departmental Cultural Meetup' => 'cancelled',
     ];
 
-    $firstActiveRegId = null;
+    $webDevRegId = null;
 
     foreach ($studentRegMap as $eventTitle => $targetStatus) {
         if (!isset($seededEventMap[$eventTitle])) {
@@ -233,9 +269,9 @@ try {
                     'status' => $targetStatus,
                     'id' => $regId,
                 ]);
-                echo "[UPDATED] Registration ID $regId set to '$targetStatus' for Event ID $eventId\n";
+                echo "[UPDATED] Demo Student registration ID $regId updated to '$targetStatus' for \"$eventTitle\"\n";
             } else {
-                echo "[INFO] Registration already set to '$targetStatus' for Event ID $eventId\n";
+                echo "[INFO] Demo Student registration ID $regId already '$targetStatus' for \"$eventTitle\"\n";
             }
         } else {
             $insertReg = $pdo->prepare("
@@ -248,36 +284,36 @@ try {
                 'status' => $targetStatus,
             ]);
             $regId = (int) $pdo->lastInsertId();
-            echo "[CREATED] Registration ID $regId created with status '$targetStatus' for Event ID $eventId\n";
+            echo "[CREATED] Demo Student registration ID $regId created with '$targetStatus' for \"$eventTitle\"\n";
         }
 
-        if ($targetStatus === 'registered' && $firstActiveRegId === null) {
-            $firstActiveRegId = $regId;
+        if ($eventTitle === 'Web Development Hands-on Workshop') {
+            $webDevRegId = $regId;
         }
     }
 
-    // 5. Seed Attendance Check-in for Demo Student's First Event
-    if ($firstActiveRegId) {
+    // 7. Seed Door Attendance Check-in for Web Development Workshop
+    if ($webDevRegId) {
         $checkAtt = $pdo->prepare('SELECT id FROM attendance WHERE registration_id = :reg_id LIMIT 1');
-        $checkAtt->execute(['reg_id' => $firstActiveRegId]);
+        $checkAtt->execute(['reg_id' => $webDevRegId]);
         if (!$checkAtt->fetch()) {
             $insertAtt = $pdo->prepare("
                 INSERT INTO attendance (registration_id, checked_in_at)
                 VALUES (:reg_id, NOW())
             ");
-            $insertAtt->execute(['reg_id' => $firstActiveRegId]);
-            echo "[CREATED] Attendance check-in recorded for Registration ID $firstActiveRegId\n";
+            $insertAtt->execute(['reg_id' => $webDevRegId]);
+            echo "[CREATED] Attendance check-in recorded for Registration ID $webDevRegId\n";
         } else {
-            echo "[INFO] Attendance already recorded for Registration ID $firstActiveRegId\n";
+            echo "[INFO] Attendance check-in already recorded for Registration ID $webDevRegId\n";
         }
     }
 
     $pdo->commit();
 
-    echo "\n=== Seed Process Finished Successfully ===\n";
-    echo "SKFGI Mankundu events count: " . count($skfgiEvents) . "\n";
-    echo "Demo Student ID: $studentId (Active Bookings + 1 Cancelled Record)\n";
-    echo "Demo Admin ID:   $adminId (Owner of SKFGI demo events)\n";
+    echo "\n=== Seeding Finished Successfully ===\n";
+    echo "SKFGI Demo Events count: " . count($targetEvents) . "\n";
+    echo "Demo Admin ID: $adminId ($adminEmail)\n";
+    echo "Demo Student ID: $studentId ($studentEmail)\n";
 
 } catch (Throwable $e) {
     if ($pdo->inTransaction()) {
