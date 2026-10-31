@@ -29,7 +29,12 @@ $stmt = $pdo->query("
             FROM registrations r
             WHERE r.event_id = e.id
               AND r.status = 'registered'
-        ) AS attendee_count
+        ) AS attendee_count,
+        (
+            SELECT COUNT(*)
+            FROM registrations r
+            WHERE r.event_id = e.id
+        ) AS total_registrations
     FROM events e
     ORDER BY e.created_at DESC
 ");
@@ -98,6 +103,22 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
     <?php endif; ?>
 
+    <?php if (!empty($_SESSION['admin_message'])): ?>
+        <div class="alert alert-success d-flex align-items-center gap-2 mb-4" role="status">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <div><?= manageEventEscape($_SESSION['admin_message']) ?></div>
+        </div>
+        <?php unset($_SESSION['admin_message']); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($_SESSION['admin_error'])): ?>
+        <div class="alert alert-danger d-flex align-items-center gap-2 mb-4" role="alert">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <div><?= manageEventEscape($_SESSION['admin_error']) ?></div>
+        </div>
+        <?php unset($_SESSION['admin_error']); ?>
+    <?php endif; ?>
+
     <!-- Header Section -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-5">
         <div>
@@ -149,6 +170,7 @@ require_once __DIR__ . '/../includes/header.php';
                             $eventTime = strtotime($event['event_date']);
                             $cap = (int) $event['capacity'];
                             $att = (int) $event['attendee_count'];
+                            $totalRegs = (int) $event['total_registrations'];
 
                             $statusBadge = 'cc-badge-category';
                             if ($event['status'] === 'published') {
@@ -193,7 +215,7 @@ require_once __DIR__ . '/../includes/header.php';
                                     </span>
                                 </td>
                                 <td class="text-end">
-                                    <div class="d-inline-flex gap-1">
+                                    <div class="d-inline-flex gap-1 align-items-center">
                                         <a href="/campusconnect/event-details.php?id=<?= (int) $event['id'] ?>" class="btn cc-btn-outline cc-btn-sm" title="Preview event on website">
                                             View
                                         </a>
@@ -203,6 +225,13 @@ require_once __DIR__ . '/../includes/header.php';
                                         <a href="/campusconnect/admin/attendees.php?event_id=<?= (int) $event['id'] ?>" class="btn cc-btn-outline cc-btn-sm" title="View attendees list">
                                             Attendees
                                         </a>
+                                        <form action="/campusconnect/admin/delete-event.php" method="post" class="d-inline m-0" onsubmit="return confirm('<?= $totalRegs > 0 ? 'This event has ' . $totalRegs . ' registration record(s). Deleting will mark the event as Cancelled to protect student records. Continue?' : 'Are you sure you want to permanently delete this event?' ?>');">
+                                            <input type="hidden" name="event_id" value="<?= (int) $event['id'] ?>">
+                                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken(), ENT_QUOTES, 'UTF-8') ?>">
+                                            <button type="submit" class="btn btn-outline-danger cc-btn-sm" title="Delete or cancel this event">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

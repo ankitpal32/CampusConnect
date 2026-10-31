@@ -21,7 +21,8 @@ $stats = $pdo->query("
         (SELECT COUNT(*) FROM events) AS total_events,
         (SELECT COUNT(*) FROM events WHERE status = 'published') AS published_events,
         (SELECT COUNT(*) FROM users WHERE role = 'student') AS total_students,
-        (SELECT COUNT(*) FROM registrations WHERE status = 'registered') AS active_registrations
+        (SELECT COUNT(*) FROM registrations WHERE status = 'registered') AS active_registrations,
+        (SELECT COUNT(*) FROM attendance) AS total_checked_in
 ")->fetch(PDO::FETCH_ASSOC);
 
 // Per-event performance statistics
@@ -33,11 +34,14 @@ $reportStmt = $pdo->query("
         e.event_date,
         e.capacity,
         e.status,
-        COUNT(r.id) AS registered_count
+        COUNT(DISTINCT r.id) AS registered_count,
+        COUNT(DISTINCT a.id) AS checked_in_count
     FROM events e
     LEFT JOIN registrations r
         ON r.event_id = e.id
         AND r.status = 'registered'
+    LEFT JOIN attendance a
+        ON a.registration_id = r.id
     GROUP BY
         e.id, e.title, e.category, e.event_date,
         e.capacity, e.status
@@ -154,9 +158,9 @@ require_once __DIR__ . '/../includes/header.php';
 
         <div class="col-sm-6 col-lg-3">
             <article class="cc-stat-card h-100">
-                <span class="cc-stat-label">Open Future Seats</span>
-                <p class="cc-stat-value text-dark"><?= number_format($availableSeats) ?></p>
-                <p class="cc-stat-desc">Remaining slots across events</p>
+                <span class="cc-stat-label">Check-In Attendance</span>
+                <p class="cc-stat-value text-dark"><?= (int) $stats['total_checked_in'] ?></p>
+                <p class="cc-stat-desc">Total verified door check-ins</p>
             </article>
         </div>
     </section>
@@ -207,6 +211,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 <th scope="col">Event Date</th>
                                 <th scope="col">Capacity</th>
                                 <th scope="col">Registered</th>
+                                <th scope="col">Checked In</th>
                                 <th scope="col" style="min-width: 160px;">Occupancy</th>
                                 <th scope="col">Status</th>
                                 <th scope="col" class="text-end">Actions</th>
@@ -217,6 +222,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 <?php
                                 $cap = (int) $event['capacity'];
                                 $reg = (int) $event['registered_count'];
+                                $chk = (int) $event['checked_in_count'];
                                 $occupancy = $cap > 0 ? min(100, round(($reg / $cap) * 100)) : 0;
                                 $eventDate = strtotime($event['event_date']);
 
@@ -252,6 +258,11 @@ require_once __DIR__ . '/../includes/header.php';
                                         <span class="small fw-bold text-dark"><?= $reg ?></span>
                                     </td>
                                     <td>
+                                        <span class="small fw-bold <?= $chk > 0 ? 'text-success' : 'text-muted' ?>">
+                                            <?= $chk ?>
+                                        </span>
+                                    </td>
+                                    <td>
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="cc-progress-track flex-grow-1" style="height: 6px;">
                                                 <div class="cc-progress-fill" style="width: <?= $occupancy ?>%;"></div>
@@ -267,9 +278,14 @@ require_once __DIR__ . '/../includes/header.php';
                                         </span>
                                     </td>
                                     <td class="text-end">
-                                        <a href="/campusconnect/admin/attendees.php?event_id=<?= (int) $event['id'] ?>" class="btn cc-btn-outline cc-btn-sm" title="View attendee roll">
-                                            Attendees
-                                        </a>
+                                        <div class="d-inline-flex gap-1">
+                                            <a href="/campusconnect/admin/attendees.php?event_id=<?= (int) $event['id'] ?>" class="btn cc-btn-outline cc-btn-sm" title="View attendee roll">
+                                                Attendees
+                                            </a>
+                                            <a href="/campusconnect/admin/export-attendees.php?event_id=<?= (int) $event['id'] ?>" class="btn cc-btn-outline cc-btn-sm" title="Export CSV">
+                                                CSV
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

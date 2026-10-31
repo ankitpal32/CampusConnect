@@ -15,9 +15,9 @@ This document details the progressive development phases of CampusConnect, track
 | **Phase 5** | Student Portal & Schedule | Student Dashboard, Registration List, Cancellations | **Completed** |
 | **Phase 6** | Admin Management & Analytics | Event Forms, Capacity Controls, Attendee Roster, Reports | **Completed** |
 | **Phase 7** | Editorial UI/UX Redesign | Brand Identity, Style System, Accessibility, Responsive UX | **Completed** |
-| **Phase 8** | Poster & Asset Uploads | File Uploads, Media Validation, Storage in `uploads/` | *Incomplete / Planned* |
-| **Phase 9** | Live Attendance & Check-in | Attendance Table Integration, Door Check-in UI | *Incomplete / Planned* |
-| **Phase 10** | Notifications & Exports | Attendee CSV Exports, Email Confirmations & Reminders | *Incomplete / Planned* |
+| **Phase 8** | Safe Deletion & Data Integrity | Safe Event Archiving/Deletion, Output Buffer Fixes | **Completed** |
+| **Phase 9** | Live Attendance & Check-in | Attendance Table Integration, Door Check-in UI | **Completed** |
+| **Phase 10** | Organizer Tooling & Exports | Attendee CSV Exports, Email Confirmations & Calendars | **In Progress** |
 
 ---
 
@@ -82,24 +82,26 @@ This document details the progressive development phases of CampusConnect, track
 
 ---
 
-## Upcoming Phases
+## Completed & In-Progress Phases
 
-### Phase 8: Event Poster Uploads & Media Handling (Planned)
-- **Tasks**:
-  - Enable `enctype="multipart/form-data"` on `admin/event-form.php` and `admin/edit-event.php`.
-  - Validate file mime types (`image/jpeg`, `image/png`, `image/webp`), size limits (max 2MB), and sanitize filenames.
-  - Store uploaded images in `uploads/posters/` and store the file path in `events.poster`.
-  - Display poster banners gracefully on `event-details.php` and cards on `events.php`.
+### Phase 8: Safe Deletion & Output Buffer Sanitation (Completed)
+- **Goal**: Protect database referential integrity during event deletion and fix output buffer flushes.
+- **Deliverables**:
+  - `admin/delete-event.php`: Safe event deletion handler. If 0 student registrations exist, allows permanent database deletion; if registrations exist, marks the event as cancelled to preserve student history and audit integrity.
+  - Sanitized 7 core PHP files (`config/database.php`, `includes/auth.php`, `cancel-registration.php`, `logout.php`, `register-event.php`, `setup-admin.php`, `test-auth.php`) to eliminate premature header flush warnings.
+- **Verification**: Verified transaction rollback and rejection of unsafe deletions.
 
-### Phase 9: Live Attendance Tracking & Check-In (Planned)
-- **Tasks**:
-  - Connect the existing `attendance` table to the administration interface.
-  - Add a "Check In" toggle / button next to each student in `admin/attendees.php`.
-  - Record the timestamp (`checked_in_at`) upon check-in.
-  - Prevent double check-ins and display checked-in vs no-show counts in `admin/reports.php`.
+### Phase 9: Live Attendance Tracking & Check-In (Completed)
+- **Goal**: Connect the `attendance` table to the administration interface for door check-in.
+- **Deliverables**:
+  - `admin/check-in.php`: Secure CSRF-protected endpoint to toggle student check-ins in the `attendance` table.
+  - `admin/attendees.php`: Roster table with "Mark Present" and "Undo" actions, with real-time checked-in count.
+  - `admin/reports.php`: Integrated total verified door check-ins in overview metrics and per-event tables.
+- **Verification**: Verified check-in status toggling, uniqueness, and metric recalculations.
 
-### Phase 10: Organizer Tooling, Notifications & Exports (Planned)
-- **Tasks**:
-  - **CSV Attendee Export**: One-click download of the attendee roster from `admin/attendees.php` formatted with student names, emails, and check-in statuses.
-  - **Email Confirmations**: Integrate PHPMailer or SMTP for registration confirmation emails.
-  - **Calendar File (.ics)**: Provide an "Add to Google / Apple Calendar" button on `event-details.php`.
+### Phase 10: Organizer Tooling, Notifications & Exports (In Progress)
+- **Deliverables**:
+  - `admin/export-attendees.php`: One-click CSV export of attendee rosters with student names, emails, booking status, and check-in timestamps.
+- **Upcoming Tasks**:
+  - Email Confirmations: Integrate PHPMailer or SMTP for registration confirmation emails.
+  - Calendar File (.ics): Provide an "Add to Google / Apple Calendar" button on `event-details.php`.
